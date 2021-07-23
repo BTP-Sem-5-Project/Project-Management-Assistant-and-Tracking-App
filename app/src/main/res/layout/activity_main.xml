@@ -12,3 +12,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>
+
+
+<!--   tools:context=".MainActivity"
+    android:background="@color/PrimaryDark">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:src="@drawable/app_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.327"
+        android:id="@+id/appLogo"/>
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="277dp"
+        android:layout_height="70dp"
+        android:text="Project Management And Tracking App"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.600" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>  -->
+
