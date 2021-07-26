@@ -5,16 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <com.google.android.gms.common.SignInButton
-        android:layout_centerInParent="true"
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</RelativeLayout>
-
-
-<!--   tools:context=".MainActivity"
+    tools:context=".MainActivity"
     android:background="@color/PrimaryDark">
 
     <ImageView
@@ -45,5 +36,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.600" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>  -->
 
+</RelativeLayout>
