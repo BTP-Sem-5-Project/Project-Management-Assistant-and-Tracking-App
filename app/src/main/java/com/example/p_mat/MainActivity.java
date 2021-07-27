@@ -27,6 +27,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
+
     ImageView imageView;
     TextView textView;
     @Override
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
-        textView = findViewById(R.id.appName);
+         textView = findViewById(R.id.appName);
         imageView = findViewById(R.id.appLogo);
         Animation animation1 = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fade_in);
         Animation animation2 = AnimationUtils.loadAnimation(MainActivity.this,R.anim.fly_in);
@@ -45,8 +46,9 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                startActivity(new Intent(MainActivity.this,RegisterActivity.class));
+                startActivity(new Intent(MainActivity.this,SignInActivity.class));
             }
         },2000);
+
     }
 }
