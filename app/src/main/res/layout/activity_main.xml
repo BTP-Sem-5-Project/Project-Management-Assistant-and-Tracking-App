@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,6 +9,7 @@
     android:background="@color/PrimaryDark">
 
     <ImageView
+        android:id="@+id/appLogo"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:src="@drawable/app_logo"
@@ -17,8 +18,7 @@
         app:layout_constraintHorizontal_bias="0.500"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.327"
-        android:id="@+id/appLogo"/>
+        app:layout_constraintVertical_bias="0.327" />
 
     <TextView
         android:id="@+id/appName"
@@ -37,4 +37,4 @@
         app:layout_constraintVertical_bias="0.600" />
 
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
