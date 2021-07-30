@@ -3,6 +3,7 @@ package com.example.p_mat;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -86,4 +87,9 @@ public class SignInActivity extends AppCompatActivity {
             Log.d("signInResult:failed ",e.toString());
         }
     }
+    public void goToRegistraionForm(View v){
+        Intent intent= new Intent(this,Regester.class);
+        startActivity(intent);
+    }
+
 }
