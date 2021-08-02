@@ -79,7 +79,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 Toast.makeText(this,personEmail,Toast.LENGTH_SHORT).show();
             }
-            startActivity(new Intent(SignInActivity.this,HomeActivity.class));
+            startActivity(new Intent(SignInActivity.this,Dashboard.class));
             // Signed in successfully, show authenticated UI.
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
