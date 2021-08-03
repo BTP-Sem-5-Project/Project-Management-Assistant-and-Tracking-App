@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 public class SignInActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     private static int RC_SIGN_IN = 100;
+    private TextView tv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,15 @@ public class SignInActivity extends AppCompatActivity {
         // Set the dimensions of the sign-in button.
         SignInButton signInButton = findViewById(R.id.sign_in_button);
         signInButton.setSize(SignInButton.SIZE_STANDARD);
+
+        tv = findViewById(R.id.goToRegister);
+
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(SignInActivity.this,RegisterActivity.class));
+            }
+        });
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
