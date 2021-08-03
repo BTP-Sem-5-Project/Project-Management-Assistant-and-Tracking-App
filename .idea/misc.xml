@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Project-Management-Assistant-and-Tracking-App/app/src/main/res/drawable/border.xml" value="0.1705" />
+        <entry key="..\:/Project-Management-Assistant-and-Tracking-App/app/src/main/res/drawable/border2.xml" value="0.1705" />
         <entry key="..\:/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_dashboard.xml" value="0.18489583333333334" />
         <entry key="..\:/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_home.xml" value="0.115625" />
         <entry key="..\:/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_main.xml" value="0.1" />
@@ -19,7 +20,6 @@
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
-
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
