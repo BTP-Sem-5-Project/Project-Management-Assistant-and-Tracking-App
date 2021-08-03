@@ -88,7 +88,7 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
     public void goToRegistraionForm(View v){
-        Intent intent= new Intent(this,Regester.class);
+        Intent intent= new Intent(this,RegisterActivity.class);
         startActivity(intent);
     }
 
