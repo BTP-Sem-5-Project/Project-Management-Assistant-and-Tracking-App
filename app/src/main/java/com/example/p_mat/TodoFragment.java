@@ -3,6 +3,8 @@ package com.example.p_mat;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,6 +61,21 @@ public class TodoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.todo_card, container, false);
+        View TODOACTIVIY = inflater.inflate(R.layout.fragment_todo, container, false);
+        // get a reference to recyclerView
+        RecyclerView recyclerView = (RecyclerView) TODOACTIVIY.findViewById(R.id.todoItem);
+        // get reference to layoutManager
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        String[] temprory = new String[4];
+        temprory[0] = "Prerit";
+        temprory[1] = "Vijay";
+        temprory[2] = "Nalin";
+        temprory[3] = "Himanshu";
+
+        // create an adapter
+        recyclerView.setAdapter(new ToDoAdapter(temprory));
+
+        return TODOACTIVIY;
     }
 }
