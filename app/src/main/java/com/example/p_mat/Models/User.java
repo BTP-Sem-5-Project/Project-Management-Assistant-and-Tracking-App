@@ -3,19 +3,18 @@ package com.example.p_mat.Models;
 import java.util.List;
 
 public class User {
-    public String id,name,github,email,resume,phone,address,qualification;
+    public String id,name,github,email,phone,address,qualification;
     public int experience;
     List<String> skills,achievements;
 
     public User() {
     }
 
-    public User(String id,String name, String github, String email, String resume, String phone, String address, String qualification, int experience, List<String> skills, List<String> achievements) {
+    public User(String id,String name, String github, String email, String phone, String address, String qualification, int experience, List<String> skills, List<String> achievements) {
         this.id = id;
         this.name = name;
         this.github = github;
         this.email = email;
-        this.resume = resume;
         this.phone = phone;
         this.address = address;
         this.qualification = qualification;
@@ -54,14 +53,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getResume() {
-        return resume;
-    }
-
-    public void setResume(String resume) {
-        this.resume = resume;
     }
 
     public String getPhone() {
