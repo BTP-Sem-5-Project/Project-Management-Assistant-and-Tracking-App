@@ -16,6 +16,7 @@
             android:orientation="vertical"
             android:background="@drawable/notice_shape"
             android:padding="0dp">
+
                 <!-- Title, secondary and supporting text -->
                 <TextView
                     android:layout_width="match_parent"
