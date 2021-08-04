@@ -55,8 +55,9 @@ public class Dashboard extends AppCompatActivity {
 
         // set notification count
         bottomNavigation.setCount(1, "10");
+
         // default
-        bottomNavigation.show(2, true);
+        bottomNavigation.show(3, true);
 
         // on click event
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
