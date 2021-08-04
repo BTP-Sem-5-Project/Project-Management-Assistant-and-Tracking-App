@@ -34,13 +34,13 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
     }
 
     public class NoticeViewHolder extends RecyclerView.ViewHolder{
-        TextView date;
+        TextView dateandtime;
         TextView subtitle;
         TextView title;
         TextView description;
         public NoticeViewHolder(@NonNull View itemView) {
             super(itemView);
-            date = (TextView) itemView.findViewById(R.id.noticedateandtime);
+            dateandtime = (TextView) itemView.findViewById(R.id.noticedateandtime);
             title = (TextView) itemView.findViewById(R.id.noticetitle);
             subtitle = (TextView) itemView.findViewById(R.id.noticesubtitle);
             description = (TextView) itemView.findViewById(R.id.noticedescription);
