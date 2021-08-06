@@ -3,6 +3,8 @@ package com.example.p_mat;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +60,20 @@ public class NoticeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notice, container, false);
+        View NOTICEACTIVIY = inflater.inflate(R.layout.fragment_notice, container, false);
+
+        RecyclerView recyclerView = (RecyclerView) NOTICEACTIVIY.findViewById(R.id.noticeitems);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        String[] temprory = new String[4];
+        temprory[0] = "BTP 1";
+        temprory[1] = "BTP 2";
+        temprory[2] = "BTP 3";
+        temprory[3] = "BTP 5";
+
+        recyclerView.setAdapter(new NoticeAdapter(temprory));
+
+        return NOTICEACTIVIY;
     }
 }
