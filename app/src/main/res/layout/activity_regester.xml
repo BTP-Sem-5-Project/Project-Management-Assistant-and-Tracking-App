@@ -234,16 +234,6 @@
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                android:id="@+id/signIn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign In"
-                android:textColor="#7C83FD"
-                android:textSize="14dp"
-                android:textStyle="bold" />
-
         </LinearLayout>
 
 
