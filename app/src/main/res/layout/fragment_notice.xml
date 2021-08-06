@@ -10,7 +10,6 @@
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-<<<<<<< HEAD
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/notice_shape"
@@ -30,12 +29,11 @@
                     android:padding="0dp"
                     android:layout_margin="0dp"
                     />
-            <TextView
-=======
+
+
             android:layout_height="match_parent"
             android:orientation="vertical">
             <androidx.recyclerview.widget.RecyclerView
->>>>>>> 5bdc4d280183e4959d80f008bf700c73f6c9f26f
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
