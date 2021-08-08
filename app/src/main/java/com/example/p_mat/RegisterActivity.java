@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +23,7 @@ import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference myDatabase;
-    private EditText Name,Phone,Email,Exp,Github,Skills,Qualification,LinkedIn;
-    private RadioGroup available;
+    private EditText Name,Phone,Email,Exp,Github,Skills,Qualification,Achievements,Address;
     private Button Register;
     private TextView goToSignIn;
     @Override
@@ -43,9 +40,9 @@ public class RegisterActivity extends AppCompatActivity {
         Github = findViewById(R.id.GitHub);
         Skills = findViewById(R.id.skills);
         Qualification = findViewById(R.id.qualification);
-        LinkedIn = findViewById(R.id.linkedin);
+        Achievements = findViewById(R.id.achievements);
+        Address = findViewById(R.id.address);
         Register = findViewById(R.id.register);
-        available = findViewById(R.id.available);
 
         goToSignIn = findViewById(R.id.signIn);
 
@@ -67,7 +64,8 @@ public class RegisterActivity extends AppCompatActivity {
                 String github = Github.getText().toString();
                 String[] skills = Skills.getText().toString().split(",");
                 String qualification = Qualification.getText().toString();
-                String linkedin = LinkedIn.getText().toString();
+                String[] achievements = Achievements.getText().toString().split(",");
+                String address = Address.getText().toString();
 
                 System.out.println(name);
                 System.out.println(phone);
@@ -80,39 +78,36 @@ public class RegisterActivity extends AppCompatActivity {
                         if(!phone.equals("")){
                             if(!github.equals("")){
                                 if(!qualification.equals("")){
-                                    if(!linkedin.equals("")){
+                                    if(!address.equals("")){
                                         if(!exp.equals("")){
-                                            int selectedRadio = available.getCheckedRadioButtonId();
-                                            if(selectedRadio!=-1){
-                                                List<String> skillsList = new ArrayList<String>();
-                                                List<String> achievementList = new ArrayList<String>();
-                                                for(String s:skills){
-                                                    skillsList.add(s);
-                                                }
-                                                Boolean isAvailable = selectedRadio==R.id.radioAvailable?true:false;
-                                                String id = myDatabase.push().getKey();
-                                                User user = new User(id,name,github,email,phone,qualification,linkedin,Integer.parseInt(exp),skillsList,isAvailable);
-                                                myDatabase.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-                                                        Toast.makeText(RegisterActivity.this,"User registered successfully",Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
-                                                        finish();
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(RegisterActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                            }else{
-                                                Toast.makeText(RegisterActivity.this,"Please select availability",Toast.LENGTH_SHORT).show();
+                                            List<String> skillsList = new ArrayList<String>();
+                                            List<String> achievementList = new ArrayList<String>();
+                                            for(String s:skills){
+                                                skillsList.add(s);
                                             }
+                                            for(String s:achievements){
+                                                achievementList.add(s);
+                                            }
+                                            String id = myDatabase.push().getKey();
+                                            User user = new User(id,name,github,email,phone,address,qualification,Integer.parseInt(exp),skillsList,achievementList);
+                                            myDatabase.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void unused) {
+                                                    Toast.makeText(RegisterActivity.this,"User registered successfully",Toast.LENGTH_SHORT).show();
+                                                    startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
+                                                    finish();
+                                                }
+                                            }).addOnFailureListener(new OnFailureListener() {
+                                                @Override
+                                                public void onFailure(@NonNull Exception e) {
+                                                    Toast.makeText(RegisterActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                                                }
+                                            });
                                         }else{
                                             Toast.makeText(RegisterActivity.this,"Please enter experience",Toast.LENGTH_SHORT).show();
                                         }
                                     }else{
-                                        Toast.makeText(RegisterActivity.this,"Please enter linkedin profile link",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this,"Please enter address",Toast.LENGTH_SHORT).show();
                                     }
                                 }else{
                                     Toast.makeText(RegisterActivity.this,"Please enter qualification",Toast.LENGTH_SHORT).show();
