@@ -27,7 +27,7 @@
 
             />
         <Button
-            android:id="@+id/people_button"
+            android:id="@+id/peoplebutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -38,7 +38,7 @@
             style="?attr/materialButtonOutlinedStyle"
             />
         <Button
-            android:id="@+id/add_notice_button"
+            android:id="@+id/addnoticebutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -48,7 +48,7 @@
             style="?attr/materialButtonOutlinedStyle"
             />
         <Button
-            android:id="@+id/forum_button"
+            android:id="@+id/forumbutton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
