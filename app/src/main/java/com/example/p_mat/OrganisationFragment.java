@@ -1,5 +1,6 @@
 package com.example.p_mat;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,18 +67,29 @@ public class OrganisationFragment extends Fragment {
                              Bundle savedInstanceState) {
             View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
 
-            RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.memberlist);
+            Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
+            RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.projectlist);
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            peopleButton.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    onClickPeopleButton();
+                }
+            });
 
             String[] temprory = new String[4];
-            temprory[0] = "Person1";
-            temprory[1] = "Person2";
-            temprory[2] = "Person3";
-            temprory[3] = "Person4";
+            temprory[0] = "Project1";
+            temprory[1] = "Project2";
+            temprory[2] = "Project3";
+            temprory[3] = "Project4";
 
             recyclerView.setAdapter(new OrganizationAdapter(temprory));
 
             return ORGANIZATIONACTIVITY;
+    }
+    public void onClickPeopleButton(){
+        Intent intent = new Intent(OrganisationFragment.this.getActivity(),PeopleActivity.class);
+        intent.putExtra("content", "organization");
+        startActivity(intent);
     }
 }
