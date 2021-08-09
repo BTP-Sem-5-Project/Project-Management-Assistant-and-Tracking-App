@@ -3,6 +3,8 @@ package com.example.p_mat;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,7 +60,20 @@ public class OrganisationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_organisation, container, false);
+            View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
+
+            RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.memberlist);
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+            String[] temprory = new String[4];
+            temprory[0] = "Person1";
+            temprory[1] = "Person2";
+            temprory[2] = "Person3";
+            temprory[3] = "Person4";
+
+            recyclerView.setAdapter(new OrganizationAdapter(temprory));
+
+            return ORGANIZATIONACTIVITY;
     }
 }
