@@ -14,43 +14,48 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="230dp"
-            app:cardBackgroundColor="@color/PrimaryDark"
-
-            app:cardCornerRadius="20dp"
             android:layout_margin="7dp"
+
+            app:cardBackgroundColor="@color/PrimaryDark"
+            app:cardCornerRadius="20dp"
             app:cardElevation="8dp">
+
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="right">
+                android:layout_gravity="right"
+                android:orientation="horizontal">
+
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
-                    android:src="@drawable/ic_edit_white_24dp"
-                    android:layout_margin="15dp">
+                    android:layout_margin="15dp"
+                    android:src="@drawable/ic_edit_white_24dp">
 
                 </ImageView>
             </LinearLayout>
+
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
 
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    app:cardCornerRadius="80dp"
                     android:layout_gravity="center"
-                    >
+                    app:cardCornerRadius="80dp">
+
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_person_black_24dp">
-                    </ImageView>
+                        android:src="@drawable/ic_person_black_24dp"></ImageView>
 
                 </androidx.cardview.widget.CardView>
 
@@ -67,26 +72,29 @@
                     android:textStyle="bold">
 
                 </TextView>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
-                    android:text="Drug Quality Chacker Expert"
                     android:alpha=".75"
+                    android:text="Drug Quality Chacker Expert"
                     android:textColor="@color/white"
                     android:textSize="15dp"
                     android:textStyle="bold">
 
                 </TextView>
             </LinearLayout>
+
             <LinearLayout
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
+                android:layout_gravity="bottom"
                 android:layout_margin="15dp"
-                android:layout_gravity="bottom">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
@@ -94,19 +102,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
                         android:text="30 Year"
-                        android:textSize="15dp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_marginRight="4dp">
+                        android:textSize="15dp"
+                        android:textStyle="bold">
 
                     </TextView>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
                         android:alpha=".75"
                         android:text="Experience"
+                        android:textColor="@color/white"
                         android:textSize="10dp">
 
                     </TextView>
@@ -114,32 +123,34 @@
                 </LinearLayout>
 
                 <View
-                    android:layout_gravity="center"
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="#c0c0c0"/>
+                    android:background="#c0c0c0" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginRight="4dp"
                         android:text="B.Tech"
-                        android:textSize="15dp"
                         android:textColor="@color/white"
-                        android:textStyle="bold"
-                        android:layout_marginRight="4dp">
+                        android:textSize="15dp"
+                        android:textStyle="bold">
 
                     </TextView>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/white"
                         android:alpha=".75"
                         android:text="Qualification"
+                        android:textColor="@color/white"
                         android:textSize="10dp">
 
                     </TextView>
@@ -150,6 +161,7 @@
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
@@ -331,7 +343,6 @@
                                     android:textSize="15dp">
 
                                 </TextView>
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -343,17 +354,7 @@
 
                                 </TextView>
                             </LinearLayout>
-
                         </LinearLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:layout_margin="10dp"
-                            android:background="#c0c0c0">
-
-                        </View>
-
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -364,56 +365,12 @@
                         android:layout_marginRight="14dp"
                         android:layout_marginBottom="0dp"
                         >
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <ImageView
-                                android:layout_gravity="top"
-                                android:layout_margin="5dp"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_home_black_24dp__1_"
-                                android:alpha=".50"
-                                >
-
-                            </ImageView>
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:textSize="15dp"
-                                    android:text="Address">
-
-                                </TextView>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:text="Shaitan Gali Khatra Mahal Aur Shamsaan ke Saamn Indore(MP),India"
-                                    android:textColor="@color/black"
-                                    android:textSize="15dp"
-                                    android:textStyle="bold">
-
-                                </TextView>
-                            </LinearLayout>
-
-
-
-                        </LinearLayout>
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
                             android:background="#c0c0c0"
                             android:layout_margin="10dp">
-
                         </View>
-
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -435,7 +392,6 @@
                                 android:layout_height="24dp"
                                 android:src="@drawable/ic_bulb_on_svgrepo_com"
                                 android:alpha=".50">
-
                             </ImageView>
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -447,7 +403,6 @@
                                     android:layout_margin="5dp"
                                     android:textSize="15dp"
                                     android:text="Skills">
-
                                 </TextView>
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -457,20 +412,31 @@
                                     android:layout_margin="5dp"
                                     android:textColor="@color/black"
                                     android:text="Note Counting, Bargaining,">
-
                                 </TextView>
                             </LinearLayout>
-
                         </LinearLayout>
-
                     </LinearLayout>
-
                 </LinearLayout>
-
             </ScrollView>
         </androidx.cardview.widget.CardView>
-
-
-
+        <androidx.cardview.widget.CardView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="30dp"
+            android:layout_margin="15dp"
+            app:cardElevation="5dp">
+            <TextView
+                android:id="@+id/status_viewer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:textColor="#9CF158"
+                android:textStyle="bold"
+                android:text="Available"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:textSize="10dp">
+            </TextView>
+        </androidx.cardview.widget.CardView>
     </LinearLayout>
 </FrameLayout>
