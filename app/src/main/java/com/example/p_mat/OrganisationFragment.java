@@ -62,15 +62,15 @@ public class OrganisationFragment extends Fragment {
                              Bundle savedInstanceState) {
             View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
 
-            RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.memberlist);
+            RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.projectlist);
 
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
             String[] temprory = new String[4];
-            temprory[0] = "Person1";
-            temprory[1] = "Person2";
-            temprory[2] = "Person3";
-            temprory[3] = "Person4";
+            temprory[0] = "Project1";
+            temprory[1] = "Project2";
+            temprory[2] = "Project3";
+            temprory[3] = "Project4";
 
             recyclerView.setAdapter(new OrganizationAdapter(temprory));
 

@@ -27,13 +27,13 @@
 
             />
         <Button
-            android:id="@+id/add_people_button"
+            android:id="@+id/people_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="Add new people"
+            android:text="people"
             app:icon="@drawable/ic_add_people"
             style="?attr/materialButtonOutlinedStyle"
             />
@@ -48,12 +48,12 @@
             style="?attr/materialButtonOutlinedStyle"
             />
         <Button
-            android:id="@+id/resume_filter"
+            android:id="@+id/forum_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="resume filter"
+            android:text="forum"
             app:icon="@drawable/ic_add_filter"
             style="?attr/materialButtonOutlinedStyle"
             />
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:id="@+id/memberlist"
+                android:id="@+id/projectlist"
                 />
         </ScrollView>
 
