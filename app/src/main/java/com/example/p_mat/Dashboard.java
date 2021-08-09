@@ -21,11 +21,10 @@ public class Dashboard extends AppCompatActivity {
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         // adding menu items
-        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_baseline_engineering_24));
-        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_organisation));
-        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_tasks));
-        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_notification));
-        bottomNavigation.add(new MeowBottomNavigation.Model(5, R.drawable.ic_account));
+        bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_organisation));
+        bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_tasks));
+        bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_notification));
+        bottomNavigation.add(new MeowBottomNavigation.Model(4, R.drawable.ic_account));
 
         bottomNavigation.setOnShowListener(new MeowBottomNavigation.ShowListener() {
             @Override
@@ -34,18 +33,15 @@ public class Dashboard extends AppCompatActivity {
                 Fragment fragment = null;
                 switch (item.getId()){
                     case 1 :
-                        fragment = new AssitantFragment();
-                        break;
-                    case 2 :
                         fragment = new OrganisationFragment();
                         break;
-                    case 3 :
+                    case 2 :
                         fragment = new TodoFragment();
                         break;
-                    case 4 :
+                    case 3 :
                         fragment = new NoticeFragment();
                         break;
-                    case 5 :
+                    case 4 :
                         fragment = new ProfileFragment();
                         break;
                 }

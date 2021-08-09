@@ -66,10 +66,11 @@ public class NoticeFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        String[] temprory = new String[4];
+        String[] temprory = new String[5];
         temprory[0] = "BTP 1";
         temprory[1] = "BTP 2";
         temprory[2] = "BTP 3";
+        temprory[3] = "BTP 4";
         temprory[3] = "BTP 5";
 
         recyclerView.setAdapter(new NoticeAdapter(temprory));
