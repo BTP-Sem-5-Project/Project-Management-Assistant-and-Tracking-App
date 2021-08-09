@@ -22,14 +22,14 @@
             android:padding="4dp"
             android:orientation="vertical">
             <TextView
-                android:id="@+id/info_text"
+                android:id="@+id/membername"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="20dp"
                 android:textStyle="bold"
                 android:text="Person1" />
             <TextView
-                android:id="@+id/post"
+                android:id="@+id/memberrank"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:textSize="15dp"
