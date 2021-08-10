@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PMAT">
+
+        <activity android:name=".add_new_todo"></activity>
+        <activity android:name=".add_new_notice" > </activity>
         <activity android:name=".PeopleActivity"></activity>
         <activity
             android:name=".Dashboard"
