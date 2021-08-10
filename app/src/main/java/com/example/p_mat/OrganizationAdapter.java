@@ -17,14 +17,14 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
     @Override
     public OrganizationAdapter.OrganizationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.organization_member_card,parent, false);
+        View view = inflater.inflate(R.layout.organization_project_card,parent, false);
         return new OrganizationAdapter.OrganizationViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull OrganizationAdapter.OrganizationViewHolder holder, int position) {
-        String membername = data[position];
-        holder.membername.setText(membername);
+        String projecttitle = data[position];
+        holder.projecttitle.setText(projecttitle);
     }
 
     @Override
@@ -33,12 +33,12 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
     }
 
     public class OrganizationViewHolder extends RecyclerView.ViewHolder{
-        TextView membername;
-        TextView memberrank;
+        TextView projecttitle;
+        TextView projectdescription;
         public OrganizationViewHolder(@NonNull View itemView) {
             super(itemView);
-            membername = (TextView) itemView.findViewById(R.id.membername);
-            memberrank = (TextView) itemView.findViewById(R.id.memberrank);
+            projecttitle = (TextView) itemView.findViewById(R.id.projecttitle);
+            projectdescription = (TextView) itemView.findViewById(R.id.projectdescription);
         }
     }
 }
