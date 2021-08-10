@@ -28,7 +28,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="30dp"
-                android:text="Creat To-Do"
+                android:text="Assign To-Do"
                 >
 
             </TextView>
@@ -64,6 +64,7 @@
             android:layout_height="200dp"
             android:gravity="top"
             android:textColor="@color/PrimaryDark"
+            android:text="hello"
             >
 
         </com.google.android.material.textfield.TextInputEditText>
