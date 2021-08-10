@@ -64,6 +64,14 @@ public class Dashboard extends AppCompatActivity {
             }
         });
 
+        // on reselect same event
+        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
+            @Override
+            public void onReselectItem(MeowBottomNavigation.Model item) {
+                Toast.makeText(getApplicationContext(), "You ReClicked" + item.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     private void loadFragment(Fragment fragment) {
