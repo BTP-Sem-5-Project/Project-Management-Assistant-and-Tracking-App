@@ -1,5 +1,6 @@
 package com.example.p_mat;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,8 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.p_mat.Models.TodoHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -73,8 +77,23 @@ public class TodoFragment extends Fragment {
 //      retrieveUserTodo();
 
 
+
+
+
         // Inflate the layout for this fragment
         View TODOACTIVIY = inflater.inflate(R.layout.fragment_todo, container, false);
+
+        FloatingActionButton fab = (FloatingActionButton) TODOACTIVIY.findViewById(R.id.fab);
+
+        Toast.makeText(getContext(), "HIIIII", Toast.LENGTH_SHORT).show();
+        System.out.println("Helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), add_new_todo.class));
+            }
+        });
+
         // get a reference to recyclerView
         RecyclerView recyclerView = (RecyclerView) TODOACTIVIY.findViewById(R.id.todoItem);
         // get reference to layoutManager
@@ -82,12 +101,15 @@ public class TodoFragment extends Fragment {
 
         String[] temprory = new String[4];
         temprory[0] = "Prerit";
-        temprory[1] = "Vijay";
-        temprory[2] = "Nalin";
-        temprory[3] = "Himanshu";
+//        temprory[1] = "Vijay";
+//        temprory[2] = "Nalin";
+//        temprory[3] = "Himanshu";
 
         // create an adapter
         recyclerView.setAdapter(new ToDoAdapter(temprory));
+
+
+
 
         return TODOACTIVIY;
     }
