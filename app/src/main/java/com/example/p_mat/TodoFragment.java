@@ -1,9 +1,11 @@
 package com.example.p_mat;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -70,23 +75,15 @@ public class TodoFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-//      storeNewTodo();
-//      retrieveUserTodo();
-
-
-
-
 
         // Inflate the layout for this fragment
         View TODOACTIVIY = inflater.inflate(R.layout.fragment_todo, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) TODOACTIVIY.findViewById(R.id.fab);
 
-        Toast.makeText(getContext(), "HIIIII", Toast.LENGTH_SHORT).show();
-        System.out.println("Helloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo");
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,19 +91,69 @@ public class TodoFragment extends Fragment {
             }
         });
 
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        ArrayList<ArrayList<String>> StoreTodo = new ArrayList<ArrayList<String>>();
+        DatabaseReference reference = rootNode.getReference("todo");
         // get a reference to recyclerView
         RecyclerView recyclerView = (RecyclerView) TODOACTIVIY.findViewById(R.id.todoItem);
         // get reference to layoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        String[] temprory = new String[4];
-        temprory[0] = "Prerit";
-//        temprory[1] = "Vijay";
-//        temprory[2] = "Nalin";
-//        temprory[3] = "Himanshu";
+        String myEmail = "preritkrjha@gmail.com";
 
-        // create an adapter
-        recyclerView.setAdapter(new ToDoAdapter(temprory));
+
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot allTodo : snapshot.getChildren()){
+                    TodoHelper todoHelper = allTodo.getValue(TodoHelper.class);
+                    if(todoHelper.getAssignedEmail().equals(myEmail)){
+                        ArrayList<String> temp = new ArrayList<>();
+                        temp.add(todoHelper.getTitle());
+                        temp.add(todoHelper.getDescription());
+                        StoreTodo.add(temp);
+                        System.out.println("EMAIL -> " + todoHelper.getTitle());
+                        for(int i = 0; i < temp.size(); i ++){
+                            System.out.println("VAL -> " + temp.get(i));
+                        }
+
+                        System.out.println("DESCRITPTION " + StoreTodo.size());
+                    }
+                }
+                int N = StoreTodo.size();
+                String[] dataTitle = new String[N];
+                String[] dataDescription = new String[N];
+
+//                Toast.makeText(getContext(), "HH" + N, Toast.LENGTH_SHORT).show();
+
+                for(int i = 0; i < N; i ++){
+                    dataTitle[i] = StoreTodo.get(i).get(0);
+                    dataDescription[i] = StoreTodo.get(i).get(1);
+                    if(dataDescription[i].length() >= 150){
+                        dataDescription[i] = dataDescription[i].substring(0, 150) + "...";
+                    }
+                }
+
+                // create an adapter
+                recyclerView.setAdapter(new ToDoAdapter(dataTitle, dataDescription));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        CompletableFuture.runAsync(() -> {
+                System.out.println("1==================================================================================");
+                reference.addValueEventListener(eventListener);
+                System.out.println("2==================================================================================");
+        });
+
+
+
+
+
+
 
 
 
@@ -140,22 +187,5 @@ public class TodoFragment extends Fragment {
         System.out.println("==================================================================================");
     }
 
-    public void storeNewTodo(){
-        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference = rootNode.getReference("todo");
 
-
-        String DeadlineDate = "27112001"; // DDMMYYYY
-        String DeadlineTime = "0300"; // HHMM
-        String Title = "Backend Work"; // Not more than 25 characters
-        String Description = "Finish Todo Backend before the deadline, its urgent"; // Not more than 60 characters
-        Boolean Completed = false; // true or false
-        String AssignedEmail = "preritkrjha@gmail.com";
-
-        TodoHelper todoHelper = new TodoHelper(DeadlineDate, DeadlineTime, Title, Description, Completed, AssignedEmail);
-
-        String id = reference.push().getKey();
-
-        reference.child(id).setValue(todoHelper);
-    }
 }
