@@ -98,8 +98,6 @@ public class add_new_todo extends AppCompatActivity {
         });
 
 
-
-
     }
     public void setDate(View v){
         datePicker();
@@ -108,13 +106,11 @@ public class add_new_todo extends AppCompatActivity {
         timePicker();
     }
     private void datePicker(){
-
         // Get Current Date
         final Calendar c = Calendar.getInstance();
         mYear = c.get(Calendar.YEAR);
         mMonth = c.get(Calendar.MONTH);
         mDay = c.get(Calendar.DAY_OF_MONTH);
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(this,
                 new DatePickerDialog.OnDateSetListener() {
 
