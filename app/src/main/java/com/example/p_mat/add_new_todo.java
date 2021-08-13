@@ -11,11 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.p_mat.Models.TodoHelper;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -39,6 +44,8 @@ public class add_new_todo extends AppCompatActivity {
 
 
 
+
+
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +61,43 @@ public class add_new_todo extends AppCompatActivity {
         textView.setAdapter(adapter);
 
         //++++++++++++++++++++++++++Date And Time ++++++++++++++++++++++++++++++++========
+
+        EditText todoAddTitle = (EditText) findViewById(R.id.todoAddTitle);
+        EditText todoAddDescription = (EditText) findViewById(R.id.todoAddDescription);
+        Button todoAddSubmit = (Button) findViewById(R.id.todoAddSubmit);
+
+        todoAddSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+                DatabaseReference reference = rootNode.getReference("todo");
+
+
+                String DeadlineDate = "27112002"; // DDMMYYYY
+                String DeadlineTime = "0300"; // HHMM
+                String Title = todoAddTitle.getText().toString(); // Not more than 25 characters
+                String Description = todoAddDescription.getText().toString(); // Not more than 60 characters
+                Boolean Completed = false; // true or false
+                String AssignedEmail = "preritiiitp@gmail.com";
+                if(!Title.equals("")){
+                    if(!Description.equals("")){
+                        TodoHelper todoHelper = new TodoHelper(DeadlineDate, DeadlineTime, Title, Description, Completed, AssignedEmail);
+                        String id = reference.push().getKey();
+                        reference.child(id).setValue(todoHelper);
+                        Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Something is Missing", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Something is Missing", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+
 
 
     }
