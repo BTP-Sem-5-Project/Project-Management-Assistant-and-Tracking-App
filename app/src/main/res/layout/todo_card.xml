@@ -94,13 +94,14 @@
         android:gravity="center">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="TITLE"
             android:textColor="@color/black"
             android:gravity="center"
             android:textStyle="bold"
-            android:id="@+id/todotitle">
+            android:id="@+id/todotitle"
+            android:layout_marginBottom="10px">
 
         </TextView>
 

@@ -53,7 +53,7 @@ public class Dashboard extends AppCompatActivity {
         bottomNavigation.setCount(1, "10");
 
         // default
-        bottomNavigation.show(3, true);
+        bottomNavigation.show(2, true);
 
         // on click event
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
