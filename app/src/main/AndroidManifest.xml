@@ -9,13 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PMAT">
+
+        <activity android:name=".add_new_todo"></activity>
+        <activity android:name=".add_new_notice" > </activity>
         <activity android:name=".PeopleActivity"></activity>
         <activity
             android:name=".Dashboard"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
