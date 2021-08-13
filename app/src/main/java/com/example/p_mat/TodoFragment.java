@@ -149,43 +149,6 @@ public class TodoFragment extends Fragment {
                 System.out.println("2==================================================================================");
         });
 
-
-
-
-
-
-
-
-
-
         return TODOACTIVIY;
     }
-
-    private void retrieveUserTodo() {
-        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        DatabaseReference reference = rootNode.getReference("todo");
-
-        String myEmail = "preritkrjha@gmail.com";
-
-        System.out.println("==================================================================================");
-        ValueEventListener eventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot allTodo : snapshot.getChildren()){
-                    TodoHelper todoHelper = allTodo.getValue(TodoHelper.class);
-                    System.out.println("DESCRITPTION " + todoHelper.getDescription());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-
-        reference.addValueEventListener(eventListener);
-        System.out.println("==================================================================================");
-    }
-
-
 }
