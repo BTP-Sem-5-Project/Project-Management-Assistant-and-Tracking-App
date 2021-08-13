@@ -53,7 +53,7 @@ public class Dashboard extends AppCompatActivity {
         bottomNavigation.setCount(1, "10");
 
         // default
-        bottomNavigation.show(3, true);
+        bottomNavigation.show(2, true);
 
         // on click event
         bottomNavigation.setOnClickMenuListener(new MeowBottomNavigation.ClickListener() {
@@ -61,6 +61,14 @@ public class Dashboard extends AppCompatActivity {
             public void onClickItem(MeowBottomNavigation.Model item) {
                 // display toast
                 Toast.makeText(getApplicationContext(), "You Clicked" + item.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        // on reselect same event
+        bottomNavigation.setOnReselectListener(new MeowBottomNavigation.ReselectListener() {
+            @Override
+            public void onReselectItem(MeowBottomNavigation.Model item) {
+                Toast.makeText(getApplicationContext(), "You ReClicked" + item.getId(), Toast.LENGTH_SHORT).show();
             }
         });
 

@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder>{
 
-    private String[] data;
-    public ToDoAdapter(String[] data){
-        this.data = data;
+    private String[] dataTitle;
+    private String[] dataDescription;
+
+
+    public ToDoAdapter(String[] dataTitle, String[] dataDescription){
+        this.dataTitle = dataTitle;
+        this.dataDescription = dataDescription;
     }
 
     @Override
@@ -24,13 +28,15 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ToDoViewHolder holder, int position) {
-        String title = data[position];
+        String title = dataTitle[position];
         holder.title.setText(title);
+        String description = dataDescription[position];
+        holder.description.setText(description);
     }
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return dataTitle.length;
     }
 
     public class ToDoViewHolder extends RecyclerView.ViewHolder{
@@ -45,7 +51,7 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
             date = (TextView) itemView.findViewById(R.id.tododate);
             month = (TextView) itemView.findViewById(R.id.todomonth);
             year = (TextView) itemView.findViewById(R.id.todoyear);
-            time = (TextView) itemView.findViewById(R.id.todotime);
+            time = (TextView) itemView.findViewById(R.id.todoDate);
             title = (TextView) itemView.findViewById(R.id.todotitle);
             description = (TextView) itemView.findViewById(R.id.tododescription);
         }
