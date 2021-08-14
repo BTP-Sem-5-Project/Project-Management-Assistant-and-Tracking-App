@@ -3,24 +3,25 @@ package com.example.p_mat.Models;
 import java.util.List;
 
 public class User {
-    public String id,name,github,email,phone,address,qualification;
+    public String id,name,github,email,phone,qualification,linkedin;
     public int experience;
-    List<String> skills,achievements;
+    List<String> skills;
+    Boolean available;
 
     public User() {
     }
 
-    public User(String id,String name, String github, String email, String phone, String address, String qualification, int experience, List<String> skills, List<String> achievements) {
+    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, int experience, List<String> skills, Boolean available) {
         this.id = id;
         this.name = name;
         this.github = github;
         this.email = email;
         this.phone = phone;
-        this.address = address;
         this.qualification = qualification;
+        this.linkedin = linkedin;
         this.experience = experience;
         this.skills = skills;
-        this.achievements = achievements;
+        this.available = available;
     }
 
     public String getId() {
@@ -63,20 +64,20 @@ public class User {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getQualification() {
         return qualification;
     }
 
     public void setQualification(String qualification) {
         this.qualification = qualification;
+    }
+
+    public String getLinkedin() {
+        return linkedin;
+    }
+
+    public void setLinkedin(String linkedin) {
+        this.linkedin = linkedin;
     }
 
     public int getExperience() {
@@ -95,11 +96,12 @@ public class User {
         this.skills = skills;
     }
 
-    public List<String> getAchievements() {
-        return achievements;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setAchievements(List<String> achievements) {
-        this.achievements = achievements;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
+
 }

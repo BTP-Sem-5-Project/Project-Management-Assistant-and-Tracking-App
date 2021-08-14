@@ -231,12 +231,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Achievements(comma-separated)"
+                android:hint="Linkedin Profile Link"
                 android:padding="5dp"
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/achievements"
+                    android:id="@+id/linkedin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -244,22 +244,24 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Address"
-                android:padding="5dp"
-                app:startIconDrawable="@drawable/ic_home_black_24dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/address"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:orientation="horizontal"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/available"
+                >
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avaliable"
+                    android:id="@+id/radioAvailable"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vacation"
+                    android:id="@+id/radioVacation"/>
+            </RadioGroup>
 
             <TextView
                 android:id="@+id/signIn"
@@ -269,7 +271,7 @@
                 android:textColor="#7C83FD"
                 android:textSize="14dp"
                 android:textStyle="bold"
-                android:layout_marginLeft="15px"/>
+                android:layout_marginLeft="25px"/>
 
         </LinearLayout>
 
