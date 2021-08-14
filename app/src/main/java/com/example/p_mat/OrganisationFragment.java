@@ -1,8 +1,11 @@
 package com.example.p_mat;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +15,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.p_mat.Models.OrganizationHelper;
+import com.example.p_mat.Models.organizationHelper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link OrganisationFragment#newInstance} factory method to
@@ -20,12 +34,12 @@ import android.widget.Button;
 public class OrganisationFragment extends Fragment {
 
 
-    // TODO: Rename parameter arguments, choose names that match
+    // Organization: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    // Organization: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -41,7 +55,7 @@ public class OrganisationFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment OrganisationFragment.
      */
-    // TODO: Rename and change types and number of parameters
+    // Organization: Rename and change types and number of parameters
     public static OrganisationFragment newInstance(String param1, String param2) {
         OrganisationFragment fragment = new OrganisationFragment();
         Bundle args = new Bundle();
@@ -62,6 +76,7 @@ public class OrganisationFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,14 +91,46 @@ public class OrganisationFragment extends Fragment {
                     onClickPeopleButton();
                 }
             });
+            FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+            ArrayList<ArrayList<String>> StoreOrganization = new ArrayList<ArrayList<String>>();;
+            DatabaseReference reference = rootNode.getReference("Organization");
+            String myEmail = "nalinagrawal333@gmail.com";
 
-            String[] temprory = new String[4];
-            temprory[0] = "Project1";
-            temprory[1] = "Project2";
-            temprory[2] = "Project3";
-            temprory[3] = "Project4";
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot allOrganization : snapshot.getChildren()){
+                        OrganizationHelper organizationHelper = allOrganization.getValue(OrganizationHelper.class);
+                        
+                    }
+                    int N = StoreOrganization.size();
+                    String[] dataTitle = new String[N];
+                    String[] dataDescription = new String[N];
 
-            recyclerView.setAdapter(new OrganizationAdapter(temprory));
+    //                Toast.makeText(getContext(), "HH" + N, Toast.LENGTH_SHORT).show();
+
+                    for(int i = 0; i < N; i ++){
+                        dataTitle[i] = StoreOrganization.get(i).get(0);
+                        dataDescription[i] = StoreOrganization.get(i).get(1);
+                        if(dataDescription[i].length() >= 150){
+                            dataDescription[i] = dataDescription[i].substring(0, 150) + "...";
+                        }
+                    }
+
+                    // create an adapter
+                    recyclerView.setAdapter(new OrganizationAdapter(dataTitle, dataDescription));
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            };
+            CompletableFuture.runAsync(() -> {
+                System.out.println("1==================================================================================");
+                reference.addValueEventListener(eventListener);
+                System.out.println("2==================================================================================");
+            });
 
             return ORGANIZATIONACTIVITY;
     }
