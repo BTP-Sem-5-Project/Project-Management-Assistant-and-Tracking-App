@@ -5,11 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".add_new_notice"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    >
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/headingTodo">
+
         <androidx.cardview.widget.CardView
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
@@ -21,6 +32,14 @@
             android:elevation="10dp"
             app:cardCornerRadius="10dp"
             app:cardBackgroundColor="@color/PrimaryDark">
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_baseline_keyboard_backspace_24"
+                >
+            </ImageView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -28,7 +47,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="30dp"
-                android:text="Creat Notice"
+                android:text="Create Notice"
                 >
 
             </TextView>
@@ -39,86 +58,85 @@
     </LinearLayout>
 
 
-    <com.google.android.material.button.MaterialButtonToggleGroup
-        android:id="@+id/toggleButton"
-        android:layout_margin="20dp"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:singleSelection="true"
-        android:weightSum="2">
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:text="Organization name"
-            style="?attr/materialButtonOutlinedStyle"
-            android:onClick="firstButton"
-            />
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:textAllCaps="false"
-            android:text="Project Name"
-            android:onClick="secondButton"
-            style="?attr/materialButtonOutlinedStyle"
-            />
-    </com.google.android.material.button.MaterialButtonToggleGroup>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="20dp">
-
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_edit_24">
-    </ImageView>
-        <TextView
-            android:id="@+id/to_TextView"
-            android:textSize="17sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/PrimaryDark"
-            android:text="to ">
-
-        </TextView>
-    </LinearLayout>
-    <com.google.android.material.textfield.TextInputLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
-        app:boxBackgroundColor="@color/white"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        app:boxStrokeColor="@color/PrimaryDark"
-        app:boxStrokeWidth="2dp"
+        android:layout_margin="17dp"
+        app:cardElevation="10dp"
+        app:cardCornerRadius="15dp"
+
         >
 
-        <com.google.android.material.textfield.TextInputEditText
 
+        <LinearLayout
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:gravity="top"
-            android:textColor="@color/PrimaryDark"
-            >
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="20dp">
 
-        </com.google.android.material.textfield.TextInputEditText>
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="whom to show"
+                >
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoCompleteNoticeItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:inputType="none"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Title">
+
+            </TextView>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:id="@+id/noticeAddTitle">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description">
+
+            </TextView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="top"
+                    android:id="@+id/noticeAddDescription"
+                    >
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
     <Button
 
         android:layout_gravity="center"
-        android:id="@+id/outlinedButton"
+        android:id="@+id/noticeAddSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAllCaps="false"
@@ -131,6 +149,8 @@
         android:textSize="20dp"
 
         />
+    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

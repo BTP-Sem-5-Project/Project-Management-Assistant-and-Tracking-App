@@ -43,7 +43,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation "androidx.recyclerview:recyclerview:1.2.1"
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+<<<<<<< HEAD
     implementation files('libs/activation.jar')
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
+=======
+    implementation 'io.alterac.blurkit:blurkit:1.1.0'
+>>>>>>> 0cab77923827bde4b80fa10ef8e839d35f20df51
 }
