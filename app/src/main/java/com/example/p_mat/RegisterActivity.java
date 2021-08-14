@@ -25,7 +25,7 @@ import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference myDatabase;
-    private EditText Name,Phone,Email,Exp,Github,Skills,Qualification,LinkedIn;
+    private EditText Name,Phone,OTP,Exp,Github,Skills,Qualification,LinkedIn;
     private RadioGroup available;
     private Button Register;
     private TextView goToSignIn;
@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         Name = findViewById(R.id.name);
         Phone = findViewById(R.id.phone);
-        Email = findViewById(R.id.email);
+        OTP = findViewById(R.id.otp);
         Exp = findViewById(R.id.experience);
         Github = findViewById(R.id.GitHub);
         Skills = findViewById(R.id.skills);
@@ -47,8 +47,10 @@ public class RegisterActivity extends AppCompatActivity {
         Register = findViewById(R.id.register);
         available = findViewById(R.id.available);
 
+        String email = getIntent().getStringExtra("EMAIL");
+        String otp = getIntent().getStringExtra("OTP");
+
         goToSignIn = findViewById(R.id.signIn);
-        Toast.makeText(this,getIntent().getStringExtra("EMAIL"),Toast.LENGTH_SHORT).show();
         goToSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = Name.getText().toString();
                 String phone = Phone.getText().toString();
-                String email = Email.getText().toString();
+                String email = OTP.getText().toString();
                 String exp = Exp.getText().toString();
                 String github = Github.getText().toString();
                 String[] skills = Skills.getText().toString().split(",");
@@ -76,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity {
                 System.out.println(github);
 
                 if(!name.equals("")){
-                    if(!email.equals("")){
+                    if(!OTP.equals("")){
                         if(!phone.equals("")){
                             if(!github.equals("")){
                                 if(!qualification.equals("")){
@@ -124,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this,"Please enter phone no.",Toast.LENGTH_SHORT).show();
                         }
                     }else{
-                        Toast.makeText(RegisterActivity.this,"Please enter email",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this,"Please enter OTP",Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Toast.makeText(RegisterActivity.this,"Please enter name",Toast.LENGTH_SHORT).show();

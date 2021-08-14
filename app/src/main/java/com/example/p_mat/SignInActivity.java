@@ -2,6 +2,7 @@ package com.example.p_mat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 
 import android.net.Uri;
@@ -23,6 +24,7 @@ public class SignInActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     private static int RC_SIGN_IN = 100;
     private TextView tv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,6 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 openDialog();
-                //startActivity(new Intent(SignInActivity.this,RegisterActivity.class));
             }
         });
 
@@ -61,12 +62,6 @@ public class SignInActivity extends AppCompatActivity {
 //            }
 //        });
 
-        String mail = "developer.vijayjoshi@gmail.com";
-        String message = "Hello from PMAT";
-        String subject = "tEST";
-
-        JavaMailAPI javaMailAPI = new JavaMailAPI(this,mail,subject,message);
-        javaMailAPI.execute();
 
     }
 
