@@ -28,14 +28,34 @@
 
             />
         <Button
-            android:id="@+id/peoplebutton"
+            android:id="@+id/createorganization"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
-            android:text="people"
+            android:text="Create organization"
+            app:icon="@drawable/ic_create_org"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <Button
+            android:id="@+id/invitebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="invite people"
             app:icon="@drawable/ic_add_people"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <Button
+            android:id="@+id/peoplebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="people"
+            app:icon="@drawable/ic_action_name"
             style="?attr/materialButtonOutlinedStyle"
             />
         <Button
