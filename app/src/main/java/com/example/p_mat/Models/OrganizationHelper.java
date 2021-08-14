@@ -4,21 +4,19 @@ import java.util.List;
 
 public class OrganizationHelper {
     String Name;
-    String Rank;
-    List<String> members;
     String CEO;
     String HR;
-    List<List<String>> projects;
+    List<String> members;
+    List<String> projects;
 
     public OrganizationHelper() {
     }
 
-    public OrganizationHelper(String name, String rank, List<String> members, String CEO, String HR, List<List<String>> projects) {
+    public OrganizationHelper(String name, String CEO, String HR, List<String> members, List<String> projects) {
         Name = name;
-        Rank = rank;
-        this.members = members;
         this.CEO = CEO;
         this.HR = HR;
+        this.members = members;
         this.projects = projects;
     }
 
@@ -28,22 +26,6 @@ public class OrganizationHelper {
 
     public void setName(String name) {
         Name = name;
-    }
-
-    public String getRank() {
-        return Rank;
-    }
-
-    public void setRank(String rank) {
-        Rank = rank;
-    }
-
-    public List<String> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<String> members) {
-        this.members = members;
     }
 
     public String getCEO() {
@@ -62,11 +44,19 @@ public class OrganizationHelper {
         this.HR = HR;
     }
 
-    public List<List<String>> getProjects() {
+    public List<String> getMembers() {
+        return members;
+    }
+
+    public void setMembers(List<String> members) {
+        this.members = members;
+    }
+
+    public List<String> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<List<String>> projects) {
+    public void setProjects(List<String> projects) {
         this.projects = projects;
     }
 }

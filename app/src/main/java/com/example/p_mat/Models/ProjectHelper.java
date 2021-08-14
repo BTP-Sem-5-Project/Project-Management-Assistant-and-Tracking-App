@@ -7,12 +7,14 @@ public class ProjectHelper {
     String Name;
     String projectManager;
     List<String> members;
+    String Organization;
 
-    public ProjectHelper(String description, String name, String projectManager, List<String> members) {
+    public ProjectHelper(String description, String name, String projectManager, List<String> members, String Organization) {
         Description = description;
         Name = name;
         this.projectManager = projectManager;
         this.members = members;
+        this.Organization = Organization;
     }
 
     public String getDescription() {
@@ -45,5 +47,13 @@ public class ProjectHelper {
 
     public void setMembers(List<String> members) {
         this.members = members;
+    }
+
+    public String getOrganization() {
+        return Organization;
+    }
+
+    public void setOrganization(String organization) {
+        Organization = organization;
     }
 }
