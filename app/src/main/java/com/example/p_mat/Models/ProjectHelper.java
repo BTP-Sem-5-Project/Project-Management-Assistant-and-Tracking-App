@@ -9,6 +9,9 @@ public class ProjectHelper {
     List<String> members;
     String Organization;
 
+    public ProjectHelper() {
+    }
+
     public ProjectHelper(String description, String name, String projectManager, List<String> members, String Organization) {
         Description = description;
         Name = name;
