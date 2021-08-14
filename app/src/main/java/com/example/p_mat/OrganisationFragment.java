@@ -1,8 +1,11 @@
 package com.example.p_mat;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,6 +14,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.p_mat.Models.OrganizationHelper;
+import com.example.p_mat.Models.ProjectHelper;
+import com.example.p_mat.Models.TodoHelper;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,12 +37,12 @@ import android.widget.Button;
 public class OrganisationFragment extends Fragment {
 
 
-    // TODO: Rename parameter arguments, choose names that match
+    // Organization: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    // Organization: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -41,7 +58,7 @@ public class OrganisationFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment OrganisationFragment.
      */
-    // TODO: Rename and change types and number of parameters
+    // Organization: Rename and change types and number of parameters
     public static OrganisationFragment newInstance(String param1, String param2) {
         OrganisationFragment fragment = new OrganisationFragment();
         Bundle args = new Bundle();
@@ -62,30 +79,67 @@ public class OrganisationFragment extends Fragment {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-            View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
+        View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
 
-            Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
-            RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.projectlist);
-
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            peopleButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    onClickPeopleButton();
+        Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
+        RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.projectlist);
+        TextView organizationName = (TextView) ORGANIZATIONACTIVITY.findViewById(R.id.organizationName);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        peopleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onClickPeopleButton();
+            }
+        });
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        ArrayList<ArrayList<String>> StoreProject = new ArrayList<ArrayList<String>>();;
+        DatabaseReference reference = rootNode.getReference("projects");
+        String myEmail = "nalinagrawal333@gmail.com";
+        String myOrganization = "btp5";
+        organizationName.setText(myOrganization);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot allProjects : snapshot.getChildren()){
+                    ProjectHelper projectHelper = allProjects.getValue(ProjectHelper.class);
+                    if(projectHelper.getOrganization().equals(myOrganization)){
+                        ArrayList<String> temp = new ArrayList<>();
+                        temp.add(projectHelper.getName());
+                        temp.add(projectHelper.getDescription());
+                        StoreProject.add(temp);
+                    }
                 }
-            });
+                int N = StoreProject.size();
+                System.out.println("Length of n: "+ N);
+                String[] dataName = new String[N];
+                String[] dataDescription = new String[N];
 
-            String[] temprory = new String[4];
-            temprory[0] = "Project1";
-            temprory[1] = "Project2";
-            temprory[2] = "Project3";
-            temprory[3] = "Project4";
+                for(int i = 0; i < N; i ++){
+                    dataName[i] = StoreProject.get(i).get(0);
+                    dataDescription[i] = StoreProject.get(i).get(1);
+                    if(dataDescription[i].length() >= 150){
+                        dataDescription[i] = dataDescription[i].substring(0, 150) + "...";
+                    }
+                }
+                // create an adapter
+                recyclerView.setAdapter(new OrganizationAdapter(dataName, dataDescription));
+            }
 
-            recyclerView.setAdapter(new OrganizationAdapter(temprory));
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-            return ORGANIZATIONACTIVITY;
+            }
+        };
+        CompletableFuture.runAsync(() -> {
+            System.out.println("1==================================================================================");
+            reference.addValueEventListener(eventListener);
+            System.out.println("2==================================================================================");
+        });
+
+        return ORGANIZATIONACTIVITY;
     }
     public void onClickPeopleButton(){
         Intent intent = new Intent(OrganisationFragment.this.getActivity(),PeopleActivity.class);
