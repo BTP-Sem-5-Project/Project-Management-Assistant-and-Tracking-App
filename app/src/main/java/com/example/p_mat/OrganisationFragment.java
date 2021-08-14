@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.p_mat.Models.OrganizationHelper;
@@ -82,63 +83,63 @@ public class OrganisationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-            View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
+        View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
 
-            Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
-            RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.projectlist);
-
-            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            peopleButton.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    onClickPeopleButton();
-                }
-            });
-            FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-            ArrayList<ArrayList<String>> StoreProject = new ArrayList<ArrayList<String>>();;
-            DatabaseReference reference = rootNode.getReference("projects");
-            String myEmail = "nalinagrawal333@gmail.com";
-            String myOrganization = "btp5";
-
-            ValueEventListener eventListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for(DataSnapshot allProjects : snapshot.getChildren()){
-                        ProjectHelper projectHelper = allProjects.getValue(ProjectHelper.class);
-                        if(projectHelper.getOrganization().equals(myOrganization)){
-                            ArrayList<String> temp = new ArrayList<>();
-                            temp.add(projectHelper.getName());
-                            temp.add(projectHelper.getDescription());
-                            StoreProject.add(temp);
-                        }
+        Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
+        RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.projectlist);
+        TextView organizationName = (TextView) ORGANIZATIONACTIVITY.findViewById(R.id.organizationName);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        peopleButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                onClickPeopleButton();
+            }
+        });
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        ArrayList<ArrayList<String>> StoreProject = new ArrayList<ArrayList<String>>();;
+        DatabaseReference reference = rootNode.getReference("projects");
+        String myEmail = "nalinagrawal333@gmail.com";
+        String myOrganization = "btp5";
+        organizationName.setText(myOrganization);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot allProjects : snapshot.getChildren()){
+                    ProjectHelper projectHelper = allProjects.getValue(ProjectHelper.class);
+                    if(projectHelper.getOrganization().equals(myOrganization)){
+                        ArrayList<String> temp = new ArrayList<>();
+                        temp.add(projectHelper.getName());
+                        temp.add(projectHelper.getDescription());
+                        StoreProject.add(temp);
                     }
-                    int N = StoreProject.size();
-                    System.out.println("Length of n: "+ N);
-                    String[] dataName = new String[N];
-                    String[] dataDescription = new String[N];
+                }
+                int N = StoreProject.size();
+                System.out.println("Length of n: "+ N);
+                String[] dataName = new String[N];
+                String[] dataDescription = new String[N];
 
-                    for(int i = 0; i < N; i ++){
-                        dataName[i] = StoreProject.get(i).get(0);
-                        dataDescription[i] = StoreProject.get(i).get(1);
-                        if(dataDescription[i].length() >= 150){
-                            dataDescription[i] = dataDescription[i].substring(0, 150) + "...";
-                        }
+                for(int i = 0; i < N; i ++){
+                    dataName[i] = StoreProject.get(i).get(0);
+                    dataDescription[i] = StoreProject.get(i).get(1);
+                    if(dataDescription[i].length() >= 150){
+                        dataDescription[i] = dataDescription[i].substring(0, 150) + "...";
                     }
-                    // create an adapter
-                    recyclerView.setAdapter(new OrganizationAdapter(dataName, dataDescription));
                 }
+                // create an adapter
+                recyclerView.setAdapter(new OrganizationAdapter(dataName, dataDescription));
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-                }
-            };
-            CompletableFuture.runAsync(() -> {
-                System.out.println("1==================================================================================");
-                reference.addValueEventListener(eventListener);
-                System.out.println("2==================================================================================");
-            });
+            }
+        };
+        CompletableFuture.runAsync(() -> {
+            System.out.println("1==================================================================================");
+            reference.addValueEventListener(eventListener);
+            System.out.println("2==================================================================================");
+        });
 
-            return ORGANIZATIONACTIVITY;
+        return ORGANIZATIONACTIVITY;
     }
     public void onClickPeopleButton(){
         Intent intent = new Intent(OrganisationFragment.this.getActivity(),PeopleActivity.class);
