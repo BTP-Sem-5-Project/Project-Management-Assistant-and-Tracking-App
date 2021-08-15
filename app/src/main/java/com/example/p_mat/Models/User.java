@@ -3,7 +3,7 @@ package com.example.p_mat.Models;
 import java.util.List;
 
 public class User {
-    public String id,name,github,email,phone,qualification,linkedin;
+    public String id,name,github,email,phone,qualification,linkedin,password;
     public int experience;
     List<String> skills;
     Boolean available;
@@ -11,7 +11,7 @@ public class User {
     public User() {
     }
 
-    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, int experience, List<String> skills, Boolean available) {
+    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, String password, int experience, List<String> skills, Boolean available) {
         this.id = id;
         this.name = name;
         this.github = github;
@@ -19,6 +19,7 @@ public class User {
         this.phone = phone;
         this.qualification = qualification;
         this.linkedin = linkedin;
+        this.password = password;
         this.experience = experience;
         this.skills = skills;
         this.available = available;
@@ -78,6 +79,14 @@ public class User {
 
     public void setLinkedin(String linkedin) {
         this.linkedin = linkedin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getExperience() {

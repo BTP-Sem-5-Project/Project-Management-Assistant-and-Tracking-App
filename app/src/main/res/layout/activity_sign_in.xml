@@ -61,7 +61,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signInEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    >
 
 
                 </com.google.android.material.textfield.TextInputEditText>
@@ -79,7 +80,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/signInPassword"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword">
 
 
                 </com.google.android.material.textfield.TextInputEditText>

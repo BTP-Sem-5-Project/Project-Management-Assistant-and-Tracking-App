@@ -23,12 +23,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference myDatabase;
-    private EditText Name,Phone,OTP,Exp,Github,Skills,Qualification,LinkedIn;
+    private EditText Name,Phone,OTP,Exp,Github,Skills,Qualification,LinkedIn,Password;
     private RadioGroup available;
     private Button Register;
-    private TextView goToSignIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,30 +47,23 @@ public class RegisterActivity extends AppCompatActivity {
         LinkedIn = findViewById(R.id.linkedin);
         Register = findViewById(R.id.register);
         available = findViewById(R.id.available);
+        Password = findViewById(R.id.password);
 
         String email = getIntent().getStringExtra("EMAIL");
-        String otp = getIntent().getStringExtra("OTP");
-
-        goToSignIn = findViewById(R.id.signIn);
-        goToSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
-                finish();
-            }
-        });
+        String otpExtra = getIntent().getStringExtra("OTP");
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = Name.getText().toString();
                 String phone = Phone.getText().toString();
-                String email = OTP.getText().toString();
                 String exp = Exp.getText().toString();
                 String github = Github.getText().toString();
                 String[] skills = Skills.getText().toString().split(",");
                 String qualification = Qualification.getText().toString();
                 String linkedin = LinkedIn.getText().toString();
+                String password = Password.getText().toString();
+                String otp = OTP.getText().toString();
 
                 System.out.println(name);
                 System.out.println(phone);
@@ -78,37 +72,50 @@ public class RegisterActivity extends AppCompatActivity {
                 System.out.println(github);
 
                 if(!name.equals("")){
-                    if(!OTP.equals("")){
+                    if(!otp.equals("")){
                         if(!phone.equals("")){
                             if(!github.equals("")){
                                 if(!qualification.equals("")){
                                     if(!linkedin.equals("")){
                                         if(!exp.equals("")){
-                                            int selectedRadio = available.getCheckedRadioButtonId();
-                                            if(selectedRadio!=-1){
-                                                List<String> skillsList = new ArrayList<String>();
-                                                List<String> achievementList = new ArrayList<String>();
-                                                for(String s:skills){
-                                                    skillsList.add(s);
+                                            if(!password.equals("")){
+                                                if(password.length()>=8){
+                                                    int selectedRadio = available.getCheckedRadioButtonId();
+                                                    if(selectedRadio!=-1){
+                                                        if(otpExtra.equals(otp)){
+                                                            String hashedPassword = BCrypt.withDefaults().hashToString(12,password.toCharArray());
+                                                            List<String> skillsList = new ArrayList<String>();
+                                                            List<String> achievementList = new ArrayList<String>();
+                                                            for(String s:skills){
+                                                                skillsList.add(s);
+                                                            }
+                                                            Boolean isAvailable = selectedRadio==R.id.radioAvailable?true:false;
+                                                            String id = myDatabase.push().getKey();
+                                                            User user = new User(id,name,github,email,phone,qualification,linkedin,hashedPassword,Integer.parseInt(exp),skillsList,isAvailable);
+                                                            myDatabase.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void unused) {
+                                                                    Toast.makeText(RegisterActivity.this,"User registered successfully",Toast.LENGTH_SHORT).show();
+                                                                    startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
+                                                                    finish();
+                                                                }
+                                                            }).addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(RegisterActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                        }else{
+                                                            Toast.makeText(RegisterActivity.this,"Invalid OTP",Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }else{
+                                                        Toast.makeText(RegisterActivity.this,"Please select availability",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }else{
+                                                    Toast.makeText(RegisterActivity.this,"Password length should be greater than or equal to 8",Toast.LENGTH_SHORT).show();
                                                 }
-                                                Boolean isAvailable = selectedRadio==R.id.radioAvailable?true:false;
-                                                String id = myDatabase.push().getKey();
-                                                User user = new User(id,name,github,email,phone,qualification,linkedin,Integer.parseInt(exp),skillsList,isAvailable);
-                                                myDatabase.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void unused) {
-                                                        Toast.makeText(RegisterActivity.this,"User registered successfully",Toast.LENGTH_SHORT).show();
-                                                        startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
-                                                        finish();
-                                                    }
-                                                }).addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Toast.makeText(RegisterActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-                                            }else{
-                                                Toast.makeText(RegisterActivity.this,"Please select availability",Toast.LENGTH_SHORT).show();
+                                            }else {
+                                                Toast.makeText(RegisterActivity.this, "Please enter password", Toast.LENGTH_SHORT).show();
                                             }
                                         }else{
                                             Toast.makeText(RegisterActivity.this,"Please enter experience",Toast.LENGTH_SHORT).show();
