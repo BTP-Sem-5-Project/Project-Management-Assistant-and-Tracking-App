@@ -9,9 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.OrganizationViewHolder>{
-    private String[] data;
-    public OrganizationAdapter(String[] data){
-        this.data = data;
+    private String[] name,description;
+    public OrganizationAdapter(String[] name,String[] description){
+        this.name = name;
+        this.description=description;
     }
 
     @Override
@@ -23,13 +24,15 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
     @Override
     public void onBindViewHolder(@NonNull OrganizationAdapter.OrganizationViewHolder holder, int position) {
-        String projecttitle = data[position];
+        String projecttitle = name[position];
+        String projectdescription = description[position];
         holder.projecttitle.setText(projecttitle);
+        holder.projectdescription.setText(projectdescription);
     }
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return name.length;
     }
 
     public class OrganizationViewHolder extends RecyclerView.ViewHolder{

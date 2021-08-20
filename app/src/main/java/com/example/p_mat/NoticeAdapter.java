@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeViewHolder>{
 
-    private String[] data;
-    public NoticeAdapter(String[] data){
-        this.data = data;
+    private String[] dataTitle;
+    private String[] dataDescription;
+
+    public NoticeAdapter(String[] dataTitle, String[] dataDescription){
+        this.dataTitle = dataTitle;
+        this.dataDescription = dataDescription;
     }
 
     @Override
@@ -24,13 +27,15 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     @Override
     public void onBindViewHolder(@NonNull NoticeViewHolder holder, int position) {
-        String title = data[position];
+        String title = dataTitle[position];
         holder.title.setText(title);
+        String description = dataDescription[position];
+        holder.description.setText(description);
     }
 
     @Override
     public int getItemCount() {
-        return data.length;
+        return dataTitle.length;
     }
 
     public class NoticeViewHolder extends RecyclerView.ViewHolder{
