@@ -47,4 +47,5 @@ dependencies {
     implementation files('libs/additionnal.jar')
     implementation files('libs/mail.jar')
     implementation 'io.alterac.blurkit:blurkit:1.1.0'
+    implementation group: 'at.favre.lib', name: 'bcrypt', version: '0.9.0'
 }
