@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/MY PROJECT/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_add_new_notice.xml" value="0.22826086956521738" />
         <entry key="..\:/MY PROJECT/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_add_new_todo.xml" value="0.115625" />
         <entry key="..\:/MY PROJECT/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_dashboard.xml" value="0.115625" />
+        <entry key="..\:/MY PROJECT/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/fragment_notice.xml" value="0.22826086956521738" />
         <entry key="..\:/MY PROJECT/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/fragment_todo.xml" value="0.2635416666666667" />
         <entry key="..\:/MY PROJECT/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/todo_card.xml" value="0.115625" />
         <entry key="..\:/Project-Management-Assistant-and-Tracking-App/app/src/main/res/drawable/border.xml" value="0.1705" />
