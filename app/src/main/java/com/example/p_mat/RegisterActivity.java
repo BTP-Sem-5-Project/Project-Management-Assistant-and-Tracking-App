@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,11 +23,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference myDatabase;
-    private EditText Name,Phone,Email,Exp,Github,Skills,Qualification,Achievements,Address;
+    private EditText Name,Phone,OTP,Exp,Github,Skills,Qualification,LinkedIn,Password;
+    private RadioGroup available;
     private Button Register;
-    private TextView goToSignIn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,37 +39,31 @@ public class RegisterActivity extends AppCompatActivity {
 
         Name = findViewById(R.id.name);
         Phone = findViewById(R.id.phone);
-        Email = findViewById(R.id.email);
+        OTP = findViewById(R.id.otp);
         Exp = findViewById(R.id.experience);
         Github = findViewById(R.id.GitHub);
         Skills = findViewById(R.id.skills);
         Qualification = findViewById(R.id.qualification);
-        Achievements = findViewById(R.id.achievements);
-        Address = findViewById(R.id.address);
+        LinkedIn = findViewById(R.id.linkedin);
         Register = findViewById(R.id.register);
+        available = findViewById(R.id.available);
+        Password = findViewById(R.id.password);
 
-        goToSignIn = findViewById(R.id.signIn);
-
-        goToSignIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
-                finish();
-            }
-        });
+        String email = getIntent().getStringExtra("EMAIL");
+        String otpExtra = getIntent().getStringExtra("OTP");
 
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = Name.getText().toString();
                 String phone = Phone.getText().toString();
-                String email = Email.getText().toString();
                 String exp = Exp.getText().toString();
                 String github = Github.getText().toString();
                 String[] skills = Skills.getText().toString().split(",");
                 String qualification = Qualification.getText().toString();
-                String[] achievements = Achievements.getText().toString().split(",");
-                String address = Address.getText().toString();
+                String linkedin = LinkedIn.getText().toString();
+                String password = Password.getText().toString();
+                String otp = OTP.getText().toString();
 
                 System.out.println(name);
                 System.out.println(phone);
@@ -74,40 +72,56 @@ public class RegisterActivity extends AppCompatActivity {
                 System.out.println(github);
 
                 if(!name.equals("")){
-                    if(!email.equals("")){
+                    if(!otp.equals("")){
                         if(!phone.equals("")){
                             if(!github.equals("")){
                                 if(!qualification.equals("")){
-                                    if(!address.equals("")){
+                                    if(!linkedin.equals("")){
                                         if(!exp.equals("")){
-                                            List<String> skillsList = new ArrayList<String>();
-                                            List<String> achievementList = new ArrayList<String>();
-                                            for(String s:skills){
-                                                skillsList.add(s);
-                                            }
-                                            for(String s:achievements){
-                                                achievementList.add(s);
-                                            }
-                                            String id = myDatabase.push().getKey();
-                                            User user = new User(id,name,github,email,phone,address,qualification,Integer.parseInt(exp),skillsList,achievementList);
-                                            myDatabase.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                @Override
-                                                public void onSuccess(Void unused) {
-                                                    Toast.makeText(RegisterActivity.this,"User registered successfully",Toast.LENGTH_SHORT).show();
-                                                    startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
-                                                    finish();
+                                            if(!password.equals("")){
+                                                if(password.length()>=8){
+                                                    int selectedRadio = available.getCheckedRadioButtonId();
+                                                    if(selectedRadio!=-1){
+                                                        if(otpExtra.equals(otp)){
+                                                            String hashedPassword = BCrypt.withDefaults().hashToString(12,password.toCharArray());
+                                                            List<String> skillsList = new ArrayList<String>();
+                                                            List<String> achievementList = new ArrayList<String>();
+                                                            for(String s:skills){
+                                                                skillsList.add(s);
+                                                            }
+                                                            Boolean isAvailable = selectedRadio==R.id.radioAvailable?true:false;
+                                                            String id = myDatabase.push().getKey();
+                                                            User user = new User(id,name,github,email,phone,qualification,linkedin,hashedPassword,Integer.parseInt(exp),skillsList,isAvailable);
+                                                            myDatabase.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                @Override
+                                                                public void onSuccess(Void unused) {
+                                                                    Toast.makeText(RegisterActivity.this,"User registered successfully",Toast.LENGTH_SHORT).show();
+                                                                    startActivity(new Intent(RegisterActivity.this,SignInActivity.class));
+                                                                    finish();
+                                                                }
+                                                            }).addOnFailureListener(new OnFailureListener() {
+                                                                @Override
+                                                                public void onFailure(@NonNull Exception e) {
+                                                                    Toast.makeText(RegisterActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
+                                                                }
+                                                            });
+                                                        }else{
+                                                            Toast.makeText(RegisterActivity.this,"Invalid OTP",Toast.LENGTH_SHORT).show();
+                                                        }
+                                                    }else{
+                                                        Toast.makeText(RegisterActivity.this,"Please select availability",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }else{
+                                                    Toast.makeText(RegisterActivity.this,"Password length should be greater than or equal to 8",Toast.LENGTH_SHORT).show();
                                                 }
-                                            }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull Exception e) {
-                                                    Toast.makeText(RegisterActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
-                                                }
-                                            });
+                                            }else {
+                                                Toast.makeText(RegisterActivity.this, "Please enter password", Toast.LENGTH_SHORT).show();
+                                            }
                                         }else{
                                             Toast.makeText(RegisterActivity.this,"Please enter experience",Toast.LENGTH_SHORT).show();
                                         }
                                     }else{
-                                        Toast.makeText(RegisterActivity.this,"Please enter address",Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(RegisterActivity.this,"Please enter linkedin profile link",Toast.LENGTH_SHORT).show();
                                     }
                                 }else{
                                     Toast.makeText(RegisterActivity.this,"Please enter qualification",Toast.LENGTH_SHORT).show();
@@ -119,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                             Toast.makeText(RegisterActivity.this,"Please enter phone no.",Toast.LENGTH_SHORT).show();
                         }
                     }else{
-                        Toast.makeText(RegisterActivity.this,"Please enter email",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this,"Please enter OTP",Toast.LENGTH_SHORT).show();
                     }
                 }else{
                     Toast.makeText(RegisterActivity.this,"Please enter name",Toast.LENGTH_SHORT).show();
