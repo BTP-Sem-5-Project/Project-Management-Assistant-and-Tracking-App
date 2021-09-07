@@ -19,11 +19,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/bottom_navigation"
         app:mbn_circleColor="@color/white"
-        app:mbn_selectedIconColor="#3c415e"
+        app:mbn_selectedIconColor="@color/PrimaryDark"
         app:mbn_countTextColor="@color/white"
-        app:mbn_countBackgroundColor="@color/PrimaryDark"
+        app:mbn_countBackgroundColor="#FF2442"
         app:mbn_defaultIconColor="@color/white"
-        app:mbn_backgroundBottomColor="#3c415e"
+        app:mbn_backgroundBottomColor="@color/PrimaryDark"
         />
 
 
