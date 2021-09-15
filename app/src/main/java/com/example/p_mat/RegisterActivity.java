@@ -52,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
         String email = getIntent().getStringExtra("EMAIL");
         String otpExtra = getIntent().getStringExtra("OTP");
 
+
         Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
