@@ -10,9 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.OrganizationViewHolder>{
     private String[] name,description;
-    public OrganizationAdapter(String[] name,String[] description){
+    private RecycleViewClickListener listener;
+
+    public OrganizationAdapter(String[] name,String[] description, RecycleViewClickListener listener){
         this.name = name;
         this.description=description;
+        this.listener=listener;
     }
 
     @Override
@@ -29,19 +32,28 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
         holder.projecttitle.setText(projecttitle);
         holder.projectdescription.setText(projectdescription);
     }
+    public interface RecycleViewClickListener{
+        void onClick(View v, int positionId);
+    }
 
     @Override
     public int getItemCount() {
         return name.length;
     }
 
-    public class OrganizationViewHolder extends RecyclerView.ViewHolder{
+    public class OrganizationViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView projecttitle;
         TextView projectdescription;
         public OrganizationViewHolder(@NonNull View itemView) {
             super(itemView);
             projecttitle = (TextView) itemView.findViewById(R.id.projecttitle);
             projectdescription = (TextView) itemView.findViewById(R.id.projectdescription);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v,getAdapterPosition());
         }
     }
 }
