@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PMAT">
         <activity
+            android:name=".InviteNewMember"
+            android:exported="true" />
+        <activity
             android:name=".InvitationBox"
             android:exported="true" />
-        <activity android:name=".CreateOrganization"></activity>
-        <activity android:name=".GitHubCommit"></activity>
+        <activity android:name=".CreateOrganization" />
+        <activity android:name=".GitHubCommit" />
         <activity android:name=".add_new_todo" />
         <activity android:name=".add_new_notice" />
         <activity android:name=".PeopleActivity" />
