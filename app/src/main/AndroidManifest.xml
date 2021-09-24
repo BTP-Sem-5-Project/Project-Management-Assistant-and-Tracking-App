@@ -11,6 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PMAT">
+<<<<<<< HEAD
         <activity
             android:name=".InviteNewMember"
             android:exported="true" />
@@ -19,12 +20,22 @@
             android:exported="true" />
         <activity android:name=".CreateOrganization" />
         <activity android:name=".GitHubCommit" />
+=======
+        <activity android:name=".ProjectPage"></activity>
+        <activity android:name=".CreateOrganization">
+        </activity>
+        <!-- <activity 
+            android:name=".InvitationBox"
+            android:exported="true" />
+        <activity android:name=".CreateOrganization"></activity> -->
+        <activity android:name=".GitHubCommit"></activity>
+>>>>>>> 34cf6364f20d978682a5175996fbd95945198114
         <activity android:name=".add_new_todo" />
         <activity android:name=".add_new_notice" />
         <activity android:name=".PeopleActivity" />
         <activity
             android:name=".Dashboard"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

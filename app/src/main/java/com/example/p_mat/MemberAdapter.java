@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberViewHolder> {
     private String[] data;
-    public MemberAdapter(String[] data){
-        this.data = data;
-    }
-
+    private String[] rank;
+    public MemberAdapter(String[] data, String[] rank){this.data=data;this.rank=rank;}
     @Override
     public MemberAdapter.MemberViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
@@ -24,7 +22,9 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
     @Override
     public void onBindViewHolder(@NonNull MemberAdapter.MemberViewHolder holder, int position) {
         String membertitle = data[position];
+        String memberdescription = rank[position];
         holder.membertitle.setText(membertitle);
+        holder.memberdescription.setText(memberdescription);
     }
 
     @Override
