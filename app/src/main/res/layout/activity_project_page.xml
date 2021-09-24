@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".OrganisationFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/simple_title"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:textSize="31dp"
+            android:text="project  name"
+            android:id="@+id/projectName"
+            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:padding="0dp"
+            android:layout_margin="10dp"
+
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+
+            android:padding="0dp">
+            <!-- Title, secondary and supporting text -->
+            <TextView
+                android:id="@+id/projecttitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:gravity="center_horizontal"
+                android:padding="0dp"
+                android:text="Project Description"
+                android:textAppearance="?attr/textAppearanceHeadline6"
+                android:textColor="@color/PrimaryDark"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Google Play Protect, regular security updates and control over how your data is shared. We’re dedicated to securing Android’s 2.5 billion+ active devices every day and keeping information private."
+                android:textAppearance="?attr/textAppearanceBody2"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:id="@+id/projectdescription"
+                />
+        </LinearLayout>
+        <Button
+            android:id="@+id/invitebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="invite people"
+            app:icon="@drawable/ic_add_people"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <Button
+            android:id="@+id/peoplebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="people"
+            app:icon="@drawable/ic_action_name"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <Button
+            android:id="@+id/addnoticebutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Add new notice"
+            app:icon="@drawable/ic_add_notice"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+        <Button
+            android:id="@+id/addtodobutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Add new Todo"
+            app:icon="@drawable/ic_action_todo"
+            style="?attr/materialButtonOutlinedStyle"
+            />
+
+    </LinearLayout>
+
+
+</FrameLayout>
