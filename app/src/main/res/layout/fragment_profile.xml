@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:text="Kachra Seth"
+                    android:text="Raj"
 
                     android:textColor="@color/white"
                     android:textSize="25dp"
@@ -89,7 +89,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:alpha=".75"
-                    android:text="Drug Quality Chacker Expert"
+                    android:text="AI Department"
                     android:textColor="@color/white"
                     android:textSize="15dp"
                     android:textStyle="bold">
@@ -209,7 +209,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="dedso_dega">
+                        android:text="tony_stark">
 
                     </TextView>
                 </LinearLayout>
@@ -231,7 +231,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Kachra Seth">
+                        android:text="jarvis">
                     </TextView>
                 </LinearLayout>
 
@@ -300,7 +300,7 @@
                                     android:textSize="15dp"
                                     android:layout_margin="5dp"
                                     android:textColor="@color/black"
-                                    android:text="kachraseth150@gmail.com">
+                                    android:text="tonystark@gmial.com">
 
                                 </TextView>
                             </LinearLayout>
@@ -421,7 +421,7 @@
                                     android:textSize="15dp"
                                     android:layout_margin="5dp"
                                     android:textColor="@color/black"
-                                    android:text="Note Counting, Bargaining,">
+                                    android:text="AI Enthusiast,Tech Expert">
                                 </TextView>
                             </LinearLayout>
                         </LinearLayout>
