@@ -86,6 +86,13 @@ public class OrganisationFragment extends Fragment {
         View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
 
         Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
+        Button inviteButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.invitebutton);
+        inviteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(OrganisationFragment.this.getActivity(),InviteNewMember.class);
+                startActivity(intent);
+            }
+        });
         RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.projectlist);
         TextView organizationName = (TextView) ORGANIZATIONACTIVITY.findViewById(R.id.organizationName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
