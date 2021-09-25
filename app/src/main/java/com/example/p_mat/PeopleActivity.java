@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.p_mat.Models.OrganizationHelper;
 import com.example.p_mat.Models.ProjectHelper;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -33,21 +34,63 @@ public class PeopleActivity extends AppCompatActivity {
         String content = getIntent().getStringExtra("content");
         System.out.println("Reached PeopleActivity"+content);
         if(content.equals("organization")){
-            String[] temprory = new String[4];
-            String[] rank = new String[4];
-            temprory[0] = "Person1";
-            temprory[1] = "Person2";
-            temprory[2] = "Person3";
-            temprory[3] = "Person4";
-            rank[0] = "CEO";
-            rank[1]="HR";
-            rank[2]="Developer";
-            rank[3]="Developer";
-            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.memberlist);
-            MemberAdapter adapter = new MemberAdapter(temprory,rank);
-            recyclerView.setHasFixedSize(true);
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-            recyclerView.setAdapter(adapter);
+
+            String orgName = "btp5";
+
+            FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+            DatabaseReference reference = rootNode.getReference("organization");
+            ArrayList<String> StoreMembers = new ArrayList<String>();
+            final String[] CEO = {new String()};
+            final String[] HR = {new String()};
+            ValueEventListener eventListener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for(DataSnapshot allOrganization : snapshot.getChildren()){
+                        OrganizationHelper organizationHelper = allOrganization.getValue(OrganizationHelper.class);
+                        if(organizationHelper.getName().equals(orgName)){
+                            CEO[0] = organizationHelper.getCEO();
+                            HR[0] = organizationHelper.getHR();
+                            for(String members: organizationHelper.getMembers()){
+                                StoreMembers.add(members);
+                            }
+                            break;
+
+                        }
+                    }
+                    int N = StoreMembers.size();
+                    String[] members = new String[N];
+                    String[] rank = new String[N];
+                    for(int i=0;i<N;i++){
+                        members[i]=StoreMembers.get(i);
+                        if(CEO[0].equals(members[i])){
+                            rank[i]="CEO";
+                        }else if(HR[0].equals(members[i])){
+                            rank[i]="HR";
+                        }else{
+                            rank[i]="Developer";
+                        }
+                    }
+
+                    System.out.println("Length of n: "+ N);
+                    RecyclerView recyclerView = (RecyclerView) findViewById(R.id.memberlist);
+                    recyclerView.setAdapter(new MemberAdapter(members,rank));
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PeopleActivity.this);
+                    linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+
+            };
+            CompletableFuture.runAsync(() -> {
+                System.out.println("1==================================================================================");
+                reference.addValueEventListener(eventListener);
+                System.out.println("2==================================================================================");
+            });
+
         }else{
             FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
             System.out.println("Reached else");
@@ -57,13 +100,10 @@ public class PeopleActivity extends AppCompatActivity {
             DatabaseReference reference = rootNode.getReference("projects");
             ValueEventListener eventListener = new ValueEventListener() {
                 @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    Log.i("content","@@@@@"+content);
+                public void onDataChange(@NonNull DataSnapshot snapshot) {;
                     for(DataSnapshot allProjects : snapshot.getChildren()){
                         ProjectHelper projectHelper = allProjects.getValue(ProjectHelper.class);
-                        System.out.println(projectHelper.getName());
                         if(projectHelper.getName().equals(content)){
-                            System.out.println("Found"+ content);
                             Manager[0] = projectHelper.getProjectManager();
                             for(String members: projectHelper.getMembers()){
                                 StoreMembers.add(members);
@@ -83,18 +123,13 @@ public class PeopleActivity extends AppCompatActivity {
                             rank[i]="Developer";
                         }
                     }
+
                     System.out.println("Length of n: "+ N);
-
-//                    recyclerView.setAdapter(new OrganizationAdapter(dataName, dataDescription));
-
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.memberlist);
                     recyclerView.setAdapter(new MemberAdapter(members,rank));
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(PeopleActivity.this);
                     linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                     recyclerView.setLayoutManager(linearLayoutManager);
-//                    MemberAdapter adapter = new MemberAdapter(members,rank);
-//                    recyclerView.setHasFixedSize(true);
-//                    recyclerView.setAdapter(adapter);
                 }
 
                 @Override
