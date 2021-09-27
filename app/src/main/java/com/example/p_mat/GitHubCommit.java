@@ -2,8 +2,11 @@ package com.example.p_mat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -35,6 +38,14 @@ public class GitHubCommit extends AppCompatActivity {
 
         rvCommits=findViewById(R.id.rvCommits);
         rvCommits.setLayoutManager(new LinearLayoutManager(this));
+
+        findViewById(R.id.buttonBarChart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),GitBarChart.class));
+            }
+        });
+
         MakeVolleyConnection(url);
     }
     public void MakeVolleyConnection(String url){
