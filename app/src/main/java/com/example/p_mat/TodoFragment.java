@@ -1,6 +1,8 @@
 package com.example.p_mat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -78,7 +80,7 @@ public class TodoFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("EMAIL", Context.MODE_PRIVATE);
         // Inflate the layout for this fragment
         View TODOACTIVIY = inflater.inflate(R.layout.fragment_todo, container, false);
 
@@ -99,7 +101,7 @@ public class TodoFragment extends Fragment {
         // get reference to layoutManager
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        String myEmail = "preritkrjha@gmail.com";
+
 
 
         ValueEventListener eventListener = new ValueEventListener() {
@@ -107,7 +109,7 @@ public class TodoFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot allTodo : snapshot.getChildren()){
                     TodoHelper todoHelper = allTodo.getValue(TodoHelper.class);
-                    if(todoHelper.getAssignedEmail().equals(myEmail)){
+                    if(todoHelper.getAssignedEmail().equals(sharedPreferences.getString("EMAIL", "DEFAULT"))){
                         ArrayList<String> temp = new ArrayList<>();
                         temp.add(todoHelper.getTitle());
                         temp.add(todoHelper.getDescription());
