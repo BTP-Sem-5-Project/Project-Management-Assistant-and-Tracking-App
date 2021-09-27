@@ -83,7 +83,8 @@ public class RegisterActivity extends AppCompatActivity {
                                                 if(password.length()>=8){
                                                     int selectedRadio = available.getCheckedRadioButtonId();
                                                     if(selectedRadio!=-1){
-                                                        if(otpExtra.equals(otp)){
+//                                                        if(otpExtra.equals(otp))
+                                                        {
                                                             String hashedPassword = BCrypt.withDefaults().hashToString(12,password.toCharArray());
                                                             List<String> skillsList = new ArrayList<String>();
                                                             List<String> achievementList = new ArrayList<String>();
@@ -106,9 +107,10 @@ public class RegisterActivity extends AppCompatActivity {
                                                                     Toast.makeText(RegisterActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
-                                                        }else{
-                                                            Toast.makeText(RegisterActivity.this,"Invalid OTP",Toast.LENGTH_SHORT).show();
                                                         }
+//                                                        else{
+//                                                            Toast.makeText(RegisterActivity.this,"Invalid OTP",Toast.LENGTH_SHORT).show();
+//                                                        }
                                                     }else{
                                                         Toast.makeText(RegisterActivity.this,"Please select availability",Toast.LENGTH_SHORT).show();
                                                     }

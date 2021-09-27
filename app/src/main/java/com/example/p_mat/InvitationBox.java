@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.p_mat.Models.InvitationHelper;
 import com.example.p_mat.Models.NoticeHelper;
@@ -25,6 +27,8 @@ public class InvitationBox extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invitation_box);
+        SharedPreferences sharedPreferences = getSharedPreferences("FIXED", MODE_PRIVATE);
+        Toast.makeText(getApplicationContext(), sharedPreferences.getString("EMAIL", "DEFAULT"), Toast.LENGTH_SHORT).show();
 
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         DatabaseReference reference = rootNode.getReference("invitation");
@@ -41,11 +45,11 @@ public class InvitationBox extends AppCompatActivity {
                 for(DataSnapshot allInvite : snapshot.getChildren()){
                     InvitationHelper inviteHelper = allInvite.getValue(InvitationHelper.class);
                     System.out.println(inviteHelper.getEmail());
-                    if(inviteHelper.getEmail().equals("preritkumarjha19@cse.iiitp.ac.in")){
+                    if(inviteHelper.getEmail().equals(sharedPreferences.getString("EMAIL", "DEFAULT"))){
                         ArrayList<String> temp = new ArrayList<>();
                         temp.add(inviteHelper.getTitle());
                         StoreTodo.add(temp);
-                        System.out.println("OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
+//                        System.out.println("OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
                     }
                 }
                 int N = StoreTodo.size();
