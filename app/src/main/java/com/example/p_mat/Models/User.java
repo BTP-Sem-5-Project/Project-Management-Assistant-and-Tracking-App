@@ -7,11 +7,11 @@ public class User {
     public int experience;
     List<String> skills;
     Boolean available;
-
+    String organization;
     public User() {
     }
 
-    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, String password, int experience, List<String> skills, Boolean available) {
+    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, String password, int experience, List<String> skills, Boolean available, String organization) {
         this.id = id;
         this.name = name;
         this.github = github;
@@ -23,7 +23,21 @@ public class User {
         this.experience = experience;
         this.skills = skills;
         this.available = available;
+        this.organization = organization;
     }
+//    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, String password, int experience, List<String> skills, Boolean available) {
+//        this.id = id;
+//        this.name = name;
+//        this.github = github;
+//        this.email = email;
+//        this.phone = phone;
+//        this.qualification = qualification;
+//        this.linkedin = linkedin;
+//        this.password = password;
+//        this.experience = experience;
+//        this.skills = skills;
+//        this.available = available;
+//    }
 
     public String getId() {
         return id;
@@ -113,4 +127,11 @@ public class User {
         this.available = available;
     }
 
+    public String getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(String organization) {
+        this.organization = organization;
+    }
 }
