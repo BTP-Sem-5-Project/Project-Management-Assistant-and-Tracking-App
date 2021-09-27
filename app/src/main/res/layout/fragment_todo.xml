@@ -68,6 +68,7 @@
         android:src="@drawable/ic_baseline_add_24"
         android:contentDescription="@string/submit"
         android:layout_margin="16dp"
-        android:backgroundTint="#5b8bc7"/>
+        android:backgroundTint="#ffff"
+        app:borderWidth="10dp"/>
 
 </FrameLayout>
