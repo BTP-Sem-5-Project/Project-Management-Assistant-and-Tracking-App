@@ -1,6 +1,8 @@
 package com.example.p_mat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -24,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -80,6 +83,8 @@ public class NoticeFragment extends Fragment {
         View NOTICEACTIVIY = inflater.inflate(R.layout.fragment_notice, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) NOTICEACTIVIY.findViewById(R.id.fab);
+        FloatingActionButton fab2 = (FloatingActionButton) NOTICEACTIVIY.findViewById(R.id.fab2);
+
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,10 +93,20 @@ public class NoticeFragment extends Fragment {
             }
         });
 
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), InvitationBox.class));
+            }
+        });
+
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         ArrayList<ArrayList<String>> StoreTodo = new ArrayList<ArrayList<String>>();
+        HashSet<String> h = new HashSet<String>();
         DatabaseReference reference = rootNode.getReference("notice");
-        String myproject = "id123";
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("FIXED", Context.MODE_PRIVATE);
+        String myproject = sharedPreferences.getString("ORG", "DEFAULT");
 
         RecyclerView recyclerView = (RecyclerView) NOTICEACTIVIY.findViewById(R.id.noticeitems);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -105,7 +120,13 @@ public class NoticeFragment extends Fragment {
                         ArrayList<String> temp = new ArrayList<>();
                         temp.add(noticeHelper.getTitle());
                         temp.add(noticeHelper.getDescription());
-                        StoreTodo.add(temp);
+                        temp.add(noticeHelper.getCreatedDate());
+                        temp.add(noticeHelper.getCreatedTime());
+                        int si = h.size();
+                        h.add(noticeHelper.getCreatedDate()+noticeHelper.getCreatedTime());
+                        if(si != h.size()){
+                            StoreTodo.add(temp);
+                        }
                         System.out.println("EMAIL -> " + noticeHelper.getTitle());
                         for(int i = 0; i < temp.size(); i ++){
                             System.out.println("VAL -> " + temp.get(i));

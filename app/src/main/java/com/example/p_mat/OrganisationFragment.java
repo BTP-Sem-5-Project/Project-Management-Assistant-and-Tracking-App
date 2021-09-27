@@ -86,6 +86,13 @@ public class OrganisationFragment extends Fragment {
         View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
 
         Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
+        Button inviteButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.invitebutton);
+        inviteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(OrganisationFragment.this.getActivity(),InviteNewMember.class);
+                startActivity(intent);
+            }
+        });
         RecyclerView recyclerView = (RecyclerView) ORGANIZATIONACTIVITY.findViewById(R.id.projectlist);
         TextView organizationName = (TextView) ORGANIZATIONACTIVITY.findViewById(R.id.organizationName);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -95,7 +102,7 @@ public class OrganisationFragment extends Fragment {
             }
         });
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
-        ArrayList<ArrayList<String>> StoreProject = new ArrayList<ArrayList<String>>();;
+        ArrayList<ArrayList<String>> StoreProject = new ArrayList<ArrayList<String>>();
         DatabaseReference reference = rootNode.getReference("projects");
         String myEmail = "nalinagrawal333@gmail.com";
         String myOrganization = "btp5";
@@ -125,7 +132,20 @@ public class OrganisationFragment extends Fragment {
                     }
                 }
                 // create an adapter
-                recyclerView.setAdapter(new OrganizationAdapter(dataName, dataDescription));
+                OrganizationAdapter.RecycleViewClickListener listener;
+                listener = new OrganizationAdapter.RecycleViewClickListener() {
+                    @Override
+                    public void onClick(View v, int positionId) {
+                        Intent intent = new Intent(OrganisationFragment.this.getActivity(),ProjectPage.class);
+                        intent.putExtra("projectName",dataName[positionId]);
+                        intent.putExtra("projectDescription", dataDescription[positionId]);
+                        startActivity(intent);
+                    }
+                };
+
+
+
+                recyclerView.setAdapter(new OrganizationAdapter(dataName, dataDescription,listener));
             }
 
             @Override
