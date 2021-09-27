@@ -26,6 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -101,9 +102,10 @@ public class NoticeFragment extends Fragment {
 
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         ArrayList<ArrayList<String>> StoreTodo = new ArrayList<ArrayList<String>>();
+        HashSet<String> h = new HashSet<String>();
         DatabaseReference reference = rootNode.getReference("notice");
 
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("EMAIL", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("FIXED", Context.MODE_PRIVATE);
         String myproject = sharedPreferences.getString("ORG", "DEFAULT");
 
         RecyclerView recyclerView = (RecyclerView) NOTICEACTIVIY.findViewById(R.id.noticeitems);
@@ -118,7 +120,13 @@ public class NoticeFragment extends Fragment {
                         ArrayList<String> temp = new ArrayList<>();
                         temp.add(noticeHelper.getTitle());
                         temp.add(noticeHelper.getDescription());
-                        StoreTodo.add(temp);
+                        temp.add(noticeHelper.getCreatedDate());
+                        temp.add(noticeHelper.getCreatedTime());
+                        int si = h.size();
+                        h.add(noticeHelper.getCreatedDate()+noticeHelper.getCreatedTime());
+                        if(si != h.size()){
+                            StoreTodo.add(temp);
+                        }
                         System.out.println("EMAIL -> " + noticeHelper.getTitle());
                         for(int i = 0; i < temp.size(); i ++){
                             System.out.println("VAL -> " + temp.get(i));
