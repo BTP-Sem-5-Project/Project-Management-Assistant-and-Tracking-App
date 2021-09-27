@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -63,6 +65,10 @@ public class SignInActivity extends AppCompatActivity {
                                         BCrypt.Result result = BCrypt.verifyer().verify(signInPassword.getText().toString().toCharArray(),user.getPassword());
                                         if(result.verified){
                                             Toast.makeText(SignInActivity.this,"Sign In Successful",Toast.LENGTH_SHORT).show();
+                                            SharedPreferences sharedpreferences = getSharedPreferences("FIXED", Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedpreferences.edit();
+                                            editor.putString("EMAIL", signInEmail.getText().toString());
+                                            editor.commit();
                                             Intent intent = new Intent(SignInActivity.this,Dashboard.class);
                                             intent.putExtra("USER_ID",user.getId());
                                             intent.putExtra("USER_EMAIL",user.getEmail());

@@ -1,6 +1,8 @@
 package com.example.p_mat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -100,7 +102,9 @@ public class NoticeFragment extends Fragment {
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         ArrayList<ArrayList<String>> StoreTodo = new ArrayList<ArrayList<String>>();
         DatabaseReference reference = rootNode.getReference("notice");
-        String myproject = "id123";
+
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("EMAIL", Context.MODE_PRIVATE);
+        String myproject = sharedPreferences.getString("ORG", "DEFAULT");
 
         RecyclerView recyclerView = (RecyclerView) NOTICEACTIVIY.findViewById(R.id.noticeitems);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
