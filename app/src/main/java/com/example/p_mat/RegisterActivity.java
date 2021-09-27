@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                             }
                                                             Boolean isAvailable = selectedRadio==R.id.radioAvailable?true:false;
                                                             String id = myDatabase.push().getKey();
-                                                            User user = new User(id,name,github,email,phone,qualification,linkedin,hashedPassword,Integer.parseInt(exp),skillsList,isAvailable);
+                                                            User user = new User(id,name,github,email,phone,qualification,linkedin,hashedPassword,Integer.parseInt(exp),skillsList,isAvailable,"DEFAULT");
                                                             myDatabase.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void unused) {

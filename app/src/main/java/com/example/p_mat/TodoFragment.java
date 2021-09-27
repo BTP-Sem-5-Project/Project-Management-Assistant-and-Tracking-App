@@ -80,7 +80,9 @@ public class TodoFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("EMAIL", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("FIXED", Context.MODE_PRIVATE);
+        String EmailPersonal = sharedPreferences.getString("EMAIL","DEFAULT");
+        Toast.makeText(this.getContext(),EmailPersonal,Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         View TODOACTIVIY = inflater.inflate(R.layout.fragment_todo, container, false);
 
