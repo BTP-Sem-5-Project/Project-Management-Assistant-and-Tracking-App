@@ -62,6 +62,7 @@ public class RegisterDialog extends AppCompatDialogFragment {
                                 Random rnd = new Random();
                                 int number = rnd.nextInt(999999);
                                 String otp = String.format("%06d",number);
+
                                 String message = "Welcome to P-MAT \nThe OTP for your account registration is " + otp;
                                 String subject = "OTP for Account Registration";
                                 sendEmail(regEmail,subject,message);
