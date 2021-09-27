@@ -83,7 +83,8 @@ public class RegisterActivity extends AppCompatActivity {
                                                 if(password.length()>=8){
                                                     int selectedRadio = available.getCheckedRadioButtonId();
                                                     if(selectedRadio!=-1){
-                                                        if(otpExtra.equals(otp)){
+//                                                        if(otpExtra.equals(otp))
+                                                        {
                                                             String hashedPassword = BCrypt.withDefaults().hashToString(12,password.toCharArray());
                                                             List<String> skillsList = new ArrayList<String>();
                                                             List<String> achievementList = new ArrayList<String>();
@@ -92,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                             }
                                                             Boolean isAvailable = selectedRadio==R.id.radioAvailable?true:false;
                                                             String id = myDatabase.push().getKey();
-                                                            User user = new User(id,name,github,email,phone,qualification,linkedin,hashedPassword,Integer.parseInt(exp),skillsList,isAvailable);
+                                                            User user = new User(id,name,github,email,phone,qualification,linkedin,hashedPassword,Integer.parseInt(exp),skillsList,isAvailable,"DEFAULT");
                                                             myDatabase.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                 @Override
                                                                 public void onSuccess(Void unused) {
@@ -106,9 +107,10 @@ public class RegisterActivity extends AppCompatActivity {
                                                                     Toast.makeText(RegisterActivity.this,"Something went wrong",Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
-                                                        }else{
-                                                            Toast.makeText(RegisterActivity.this,"Invalid OTP",Toast.LENGTH_SHORT).show();
                                                         }
+//                                                        else{
+//                                                            Toast.makeText(RegisterActivity.this,"Invalid OTP",Toast.LENGTH_SHORT).show();
+//                                                        }
                                                     }else{
                                                         Toast.makeText(RegisterActivity.this,"Please select availability",Toast.LENGTH_SHORT).show();
                                                     }
