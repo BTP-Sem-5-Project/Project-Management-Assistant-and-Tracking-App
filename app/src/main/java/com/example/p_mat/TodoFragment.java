@@ -28,6 +28,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -85,19 +88,53 @@ public class TodoFragment extends Fragment {
         Toast.makeText(this.getContext(),EmailPersonal,Toast.LENGTH_SHORT).show();
         // Inflate the layout for this fragment
         View TODOACTIVIY = inflater.inflate(R.layout.fragment_todo, container, false);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
+        DatabaseReference reference = rootNode.getReference("organization");
+        ArrayList<String> MEMBERS = new ArrayList<>();
+        String myproject = sharedPreferences.getString("ORG", "DEFAULT");
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot allorg : snapshot.getChildren()){
+                    System.out.println("------------------------------------------------------------------");
+                    System.out.println(allorg.getKey());
+                    if(allorg.getKey().equals(myproject)){
+                        System.out.println("---------------");
+                        List<String> group = (List<String>) allorg.child("members").getValue();
+                        for(int i = 0; i < group.size(); i ++){
+                            MEMBERS.add(group.get(i));
+                        }
+                    }
+                }
+
+                System.out.println(MEMBERS);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+        reference.addValueEventListener(eventListener);
+
 
         FloatingActionButton fab = (FloatingActionButton) TODOACTIVIY.findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), add_new_todo.class));
+                Intent ii = new Intent(getActivity(), add_new_todo.class);
+                ii.putExtra("member", MEMBERS);
+                startActivity(ii);
             }
         });
 
-        FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         ArrayList<ArrayList<String>> StoreTodo = new ArrayList<ArrayList<String>>();
-        DatabaseReference reference = rootNode.getReference("todo");
+        DatabaseReference reference2 = rootNode.getReference("todo");
         // get a reference to recyclerView
         RecyclerView recyclerView = (RecyclerView) TODOACTIVIY.findViewById(R.id.todoItem);
         // get reference to layoutManager
@@ -106,7 +143,7 @@ public class TodoFragment extends Fragment {
 
 
 
-        ValueEventListener eventListener = new ValueEventListener() {
+        ValueEventListener eventListener2 = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot allTodo : snapshot.getChildren()){
@@ -149,7 +186,7 @@ public class TodoFragment extends Fragment {
         };
         CompletableFuture.runAsync(() -> {
                 System.out.println("1==================================================================================");
-                reference.addValueEventListener(eventListener);
+                reference2.addValueEventListener(eventListener2);
                 System.out.println("2==================================================================================");
         });
 
