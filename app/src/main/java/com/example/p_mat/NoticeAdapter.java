@@ -12,11 +12,20 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
 
     private String[] dataTitle;
     private String[] dataDescription;
+    private String[] createdDate;
+    private String[] createdTime;
 
-    public NoticeAdapter(String[] dataTitle, String[] dataDescription){
+    public NoticeAdapter(String[] dataTitle, String[] dataDescription, String[] createdDate, String[] createdTime) {
         this.dataTitle = dataTitle;
         this.dataDescription = dataDescription;
+        this.createdDate = createdDate;
+        this.createdTime = createdTime;
     }
+
+//    public NoticeAdapter(String[] dataTitle, String[] dataDescription){
+//        this.dataTitle = dataTitle;
+//        this.dataDescription = dataDescription;
+//    }
 
     @Override
     public NoticeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,6 +40,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeView
         holder.title.setText(title);
         String description = dataDescription[position];
         holder.description.setText(description);
+        holder.dateandtime.setText(createdDate[position]+" at "+createdTime[position]);
     }
 
     @Override
