@@ -3,6 +3,7 @@ package com.example.p_mat;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -61,6 +62,7 @@ public class add_new_notice extends AppCompatActivity {
                         String id = reference.push().getKey();
                         reference.child(id).setValue(noticeHelper);
                         Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(add_new_notice.this, Dashboard.class));
                     }
                     else{
                         Toast.makeText(getApplicationContext(), "Something is Missing", Toast.LENGTH_SHORT).show();

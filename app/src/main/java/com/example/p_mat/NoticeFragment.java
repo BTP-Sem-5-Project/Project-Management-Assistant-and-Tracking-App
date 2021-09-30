@@ -142,7 +142,7 @@ public class NoticeFragment extends Fragment {
                     dataDescription[i] = StoreTodo.get(i).get(1);
                     createDate[i] = StoreTodo.get(i).get(2);
                     createTime[i] = StoreTodo.get(i).get(3);
-                    Toast.makeText(getContext(),createDate[i],Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),createDate[i],Toast.LENGTH_SHORT).show();
                     if(dataDescription[i].length() >= 350){
                         dataDescription[i] = dataDescription[i].substring(0, 350) + "...";
                     }
