@@ -39,6 +39,18 @@
             </TextView>
         </androidx.cardview.widget.CardView>
     </LinearLayout>
+
+        <Button
+            android:text="BarChart"
+            android:id="@+id/buttonBarChart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        </Button>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCommits"
         android:padding="10dp"
