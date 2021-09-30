@@ -1,13 +1,14 @@
 package com.example.p_mat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,14 +21,19 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
-public class GitHubCommit extends AppCompatActivity {
+public class GitHubCommitAPI extends AppCompatActivity {
     RecyclerView rvCommits;
 
     //Githun APi url Info
     String owner="nalin-programmer";
-    String repository="Loco-Cart-Backend";
+    String repository="Loco-Cart-Frontend";
     String url="https://api.github.com/repos/"+owner+"/"+repository+"/commits";
+    //https://api.github.com/repos/nalin-programmer/Loco-Cart-Frontend/commits
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +44,14 @@ public class GitHubCommit extends AppCompatActivity {
 
         rvCommits=findViewById(R.id.rvCommits);
         rvCommits.setLayoutManager(new LinearLayoutManager(this));
-
-        findViewById(R.id.buttonBarChart).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),GitBarChart.class));
-            }
-        });
-
+        AppCompatButton appCompatButton;
         MakeVolleyConnection(url);
+
+
+
     }
     public void MakeVolleyConnection(String url){
+
         ArrayList<Commit>commitsArrayList=new ArrayList<Commit>();
         //Requesting Data from GITHUB api
         RequestQueue requestQueue= Volley.newRequestQueue(this);
@@ -61,13 +64,22 @@ public class GitHubCommit extends AppCompatActivity {
                         JSONObject committer=obj.getJSONObject("committer");
                         JSONObject commit = obj.getJSONObject("commit");
                         JSONObject author = commit.getJSONObject("author");
-                        String commiterName=committer.getString("login");
+                        String commiterName=author.getString("name");
                         String commitDate=author.getString("date");
                         String commitMsg =commit.getString("message");
                         commitsArrayList.add(new Commit(commiterName,commitDate,commitMsg));
                     }
+
                     CommitsAdapter adapter= new CommitsAdapter(commitsArrayList);
                     rvCommits.setAdapter(adapter);
+                    findViewById(R.id.buttonBarChart).setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(getApplicationContext(), GitHubStatisticsAPI.class);
+                            startActivity(intent);
+                        }
+                    });
+
                 }catch (JSONException | ParseException e) {
                     e.printStackTrace();
                 }
