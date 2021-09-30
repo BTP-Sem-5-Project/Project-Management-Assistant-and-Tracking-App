@@ -1,12 +1,17 @@
 package com.example.p_mat;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -16,19 +21,25 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.p_mat.Models.NoticeHelper;
 import com.example.p_mat.Models.TodoHelper;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Objects;
 
 public class add_new_todo extends AppCompatActivity {
     AutoCompleteTextView autoCompleteTextView;
-    private  final  String[] members = new String[] {
-            "All","Personal", "Organization Name", "Member 1", "Member 2"
-    };
+    ArrayList<String> members = new ArrayList<String>();
+
+
 
     String date_time = "";
     int mYear;
@@ -37,6 +48,8 @@ public class add_new_todo extends AppCompatActivity {
 
     int mHour;
     int mMinute;
+    String AEmail = "";
+
 
 
     //EditText et_show_date_time = (EditText) findViewById(R.id.et_show_date_time);
@@ -51,6 +64,11 @@ public class add_new_todo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_todo);
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+
+        members = (ArrayList) b.get("member");
+
 
         //++++++++++++++Drop Down List+++++++++++++++++++++++++++
         autoCompleteTextView=findViewById(R.id.autoCompleteDodoItem);
@@ -59,6 +77,15 @@ public class add_new_todo extends AppCompatActivity {
         AutoCompleteTextView textView = (AutoCompleteTextView)
                 findViewById(R.id.autoCompleteDodoItem);
         textView.setAdapter(adapter);
+        textView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = (String) adapterView.getItemAtPosition(i);
+                AEmail = item;
+            }
+        });
+
+
 
         //++++++++++++++++++++++++++Date And Time ++++++++++++++++++++++++++++++++========
 
@@ -75,11 +102,13 @@ public class add_new_todo extends AppCompatActivity {
 
                 String DeadlineDate = ("" + mDay) + ("" + mMonth) + ("" + mYear); // DDMMYYYY
                 String DeadlineTime = ("" + mHour) + ("" + mMinute) ; // HHMM
+
+//                Toast.makeText(getApplicationContext(), DeadlineDate, Toast.LENGTH_SHORT).show();
                 String Title = todoAddTitle.getText().toString(); // Not more than 25 characters
                 String Description = todoAddDescription.getText().toString(); // Not more than 60 characters
                 Boolean Completed = false; // true or false
-                String AssignedEmail = "preritiiitp@gmail.com";
-                    if(!Description.equals("") || !Description.equals("") || !DeadlineDate.equals("") || !DeadlineTime.equals("")){
+                String AssignedEmail = AEmail;
+                    if(!Description.equals("") && !Description.equals("") && !DeadlineDate.equals("") && !DeadlineTime.equals("") && !AssignedEmail.equals("")){
                         TodoHelper todoHelper = new TodoHelper(DeadlineDate, DeadlineTime, Title, Description, Completed, AssignedEmail);
                         String id = reference.push().getKey();
                         reference.child(id).setValue(todoHelper);
@@ -119,6 +148,7 @@ public class add_new_todo extends AppCompatActivity {
                         //*************Call Time Picker Here ********************
                     }
                 }, mYear, mMonth, mDay);
+
         datePickerDialog.show();
     }
 
