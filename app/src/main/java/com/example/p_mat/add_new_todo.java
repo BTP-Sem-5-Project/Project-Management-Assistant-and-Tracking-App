@@ -73,14 +73,13 @@ public class add_new_todo extends AppCompatActivity {
                 DatabaseReference reference = rootNode.getReference("todo");
 
 
-                String DeadlineDate = "27112002"; // DDMMYYYY
-                String DeadlineTime = "0300"; // HHMM
+                String DeadlineDate = ("" + mDay) + ("" + mMonth) + ("" + mYear); // DDMMYYYY
+                String DeadlineTime = ("" + mHour) + ("" + mMinute) ; // HHMM
                 String Title = todoAddTitle.getText().toString(); // Not more than 25 characters
                 String Description = todoAddDescription.getText().toString(); // Not more than 60 characters
                 Boolean Completed = false; // true or false
                 String AssignedEmail = "preritiiitp@gmail.com";
-                if(!Title.equals("")){
-                    if(!Description.equals("")){
+                    if(!Description.equals("") || !Description.equals("") || !DeadlineDate.equals("") || !DeadlineTime.equals("")){
                         TodoHelper todoHelper = new TodoHelper(DeadlineDate, DeadlineTime, Title, Description, Completed, AssignedEmail);
                         String id = reference.push().getKey();
                         reference.child(id).setValue(todoHelper);
@@ -89,10 +88,7 @@ public class add_new_todo extends AppCompatActivity {
                     else{
                         Toast.makeText(getApplicationContext(), "Something is Missing", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Something is Missing", Toast.LENGTH_SHORT).show();
-                }
+
 
             }
         });

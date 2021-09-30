@@ -84,7 +84,6 @@ public class NoticeFragment extends Fragment {
         View NOTICEACTIVIY = inflater.inflate(R.layout.fragment_notice, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) NOTICEACTIVIY.findViewById(R.id.fab);
-        FloatingActionButton fab2 = (FloatingActionButton) NOTICEACTIVIY.findViewById(R.id.fab2);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -94,12 +93,7 @@ public class NoticeFragment extends Fragment {
             }
         });
 
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), InvitationBox.class));
-            }
-        });
+
 
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         ArrayList<ArrayList<String>> StoreTodo = new ArrayList<ArrayList<String>>();
