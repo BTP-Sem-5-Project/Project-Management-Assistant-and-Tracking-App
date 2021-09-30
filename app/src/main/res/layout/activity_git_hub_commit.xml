@@ -41,12 +41,14 @@
     </LinearLayout>
 
         <Button
-            android:text="BarChart"
+            android:text="Statistics"
             android:id="@+id/buttonBarChart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
             android:textColor="@color/black"
+            android:layout_gravity="center_horizontal"
+
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
         </Button>
