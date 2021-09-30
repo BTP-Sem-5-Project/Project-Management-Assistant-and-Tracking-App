@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.p_mat.Models.NoticeHelper;
 import com.example.p_mat.Models.TodoHelper;
@@ -26,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.concurrent.CompletableFuture;
 
 /**
@@ -101,9 +103,10 @@ public class NoticeFragment extends Fragment {
 
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         ArrayList<ArrayList<String>> StoreTodo = new ArrayList<ArrayList<String>>();
+        HashSet<String> h = new HashSet<String>();
         DatabaseReference reference = rootNode.getReference("notice");
 
-        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("EMAIL", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("FIXED", Context.MODE_PRIVATE);
         String myproject = sharedPreferences.getString("ORG", "DEFAULT");
 
         RecyclerView recyclerView = (RecyclerView) NOTICEACTIVIY.findViewById(R.id.noticeitems);
@@ -118,7 +121,13 @@ public class NoticeFragment extends Fragment {
                         ArrayList<String> temp = new ArrayList<>();
                         temp.add(noticeHelper.getTitle());
                         temp.add(noticeHelper.getDescription());
-                        StoreTodo.add(temp);
+                        temp.add(noticeHelper.getCreatedDate());
+                        temp.add(noticeHelper.getCreatedTime());
+                        int si = h.size();
+                        h.add(noticeHelper.getCreatedDate()+noticeHelper.getCreatedTime());
+                        if(si != h.size()){
+                            StoreTodo.add(temp);
+                        }
                         System.out.println("EMAIL -> " + noticeHelper.getTitle());
                         for(int i = 0; i < temp.size(); i ++){
                             System.out.println("VAL -> " + temp.get(i));
@@ -130,19 +139,23 @@ public class NoticeFragment extends Fragment {
                 int N = StoreTodo.size();
                 String[] dataTitle = new String[N];
                 String[] dataDescription = new String[N];
-
+                String[] createDate = new String[N];
+                String[] createTime = new String[N];
 //                Toast.makeText(getContext(), "HH" + N, Toast.LENGTH_SHORT).show();
 
                 for(int i = 0; i < N; i ++){
                     dataTitle[i] = StoreTodo.get(i).get(0);
                     dataDescription[i] = StoreTodo.get(i).get(1);
+                    createDate[i] = StoreTodo.get(i).get(2);
+                    createTime[i] = StoreTodo.get(i).get(3);
+                    Toast.makeText(getContext(),createDate[i],Toast.LENGTH_SHORT).show();
                     if(dataDescription[i].length() >= 350){
                         dataDescription[i] = dataDescription[i].substring(0, 350) + "...";
                     }
                 }
 
                 // create an adapter
-                recyclerView.setAdapter(new NoticeAdapter(dataTitle, dataDescription));
+                recyclerView.setAdapter(new NoticeAdapter(dataTitle, dataDescription, createDate,createTime));
             }
 
             @Override
