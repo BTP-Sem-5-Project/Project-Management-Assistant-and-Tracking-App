@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.p_mat.Models.NoticeHelper;
 import com.example.p_mat.Models.TodoHelper;
@@ -83,7 +84,6 @@ public class NoticeFragment extends Fragment {
         View NOTICEACTIVIY = inflater.inflate(R.layout.fragment_notice, container, false);
 
         FloatingActionButton fab = (FloatingActionButton) NOTICEACTIVIY.findViewById(R.id.fab);
-        FloatingActionButton fab2 = (FloatingActionButton) NOTICEACTIVIY.findViewById(R.id.fab2);
 
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -93,12 +93,7 @@ public class NoticeFragment extends Fragment {
             }
         });
 
-        fab2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), InvitationBox.class));
-            }
-        });
+
 
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         ArrayList<ArrayList<String>> StoreTodo = new ArrayList<ArrayList<String>>();
@@ -138,19 +133,23 @@ public class NoticeFragment extends Fragment {
                 int N = StoreTodo.size();
                 String[] dataTitle = new String[N];
                 String[] dataDescription = new String[N];
-
+                String[] createDate = new String[N];
+                String[] createTime = new String[N];
 //                Toast.makeText(getContext(), "HH" + N, Toast.LENGTH_SHORT).show();
 
                 for(int i = 0; i < N; i ++){
                     dataTitle[i] = StoreTodo.get(i).get(0);
                     dataDescription[i] = StoreTodo.get(i).get(1);
+                    createDate[i] = StoreTodo.get(i).get(2);
+                    createTime[i] = StoreTodo.get(i).get(3);
+                    Toast.makeText(getContext(),createDate[i],Toast.LENGTH_SHORT).show();
                     if(dataDescription[i].length() >= 350){
                         dataDescription[i] = dataDescription[i].substring(0, 350) + "...";
                     }
                 }
 
                 // create an adapter
-                recyclerView.setAdapter(new NoticeAdapter(dataTitle, dataDescription));
+                recyclerView.setAdapter(new NoticeAdapter(dataTitle, dataDescription, createDate,createTime));
             }
 
             @Override

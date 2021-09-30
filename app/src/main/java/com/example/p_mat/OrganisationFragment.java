@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.p_mat.Models.OrganizationHelper;
 import com.example.p_mat.Models.ProjectHelper;
 import com.example.p_mat.Models.TodoHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -84,6 +85,14 @@ public class OrganisationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View ORGANIZATIONACTIVITY = inflater.inflate(R.layout.fragment_organisation, container, false);
+
+        FloatingActionButton fab2 = (FloatingActionButton) ORGANIZATIONACTIVITY.findViewById(R.id.fab2);
+        fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), InvitationBox.class));
+            }
+        });
 
         Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
         Button inviteButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.invitebutton);
