@@ -41,26 +41,26 @@
     </LinearLayout>
 
         <Button
-            android:text="Statistics"
+            android:layout_gravity="center"
             android:id="@+id/buttonBarChart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"
-            android:layout_gravity="center_horizontal"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-        </Button>
+            android:text="Statistics"
+            app:icon="@drawable/ic_equalizer_black_24dp"
+            style="?attr/materialButtonOutlinedStyle"
+            />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCommits"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" >
+    </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
