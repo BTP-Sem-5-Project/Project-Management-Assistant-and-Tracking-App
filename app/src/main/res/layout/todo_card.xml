@@ -41,7 +41,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AUG"
             android:layout_margin="4dp"
             android:textStyle="bold"
             android:id="@+id/todomonth"
@@ -53,7 +52,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="03"
             android:textSize="20dp"
             android:textColor="@color/PrimaryDark"
             android:layout_margin="4dp"
@@ -67,7 +65,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2021"
             android:layout_margin="4dp"
             android:textStyle="bold"
             android:id="@+id/todoyear"
@@ -117,7 +114,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Due 15:03"
             android:gravity="center"
             android:layout_marginBottom="10dp"
             android:id="@+id/todoDate"
