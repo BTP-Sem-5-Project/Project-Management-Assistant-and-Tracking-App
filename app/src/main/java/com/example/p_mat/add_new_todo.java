@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -49,7 +51,7 @@ public class add_new_todo extends AppCompatActivity {
     int mHour;
     int mMinute;
     String AEmail = "";
-
+    String DeadlineDate;
 
 
     //EditText et_show_date_time = (EditText) findViewById(R.id.et_show_date_time);
@@ -99,8 +101,8 @@ public class add_new_todo extends AppCompatActivity {
                 FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
                 DatabaseReference reference = rootNode.getReference("todo");
 
-
-                String DeadlineDate = ("" + mDay) + ("" + mMonth) + ("" + mYear); // DDMMYYYY
+                Log.d("him","================================================"+DeadlineDate);
+                //DeadlineDate has correct date use it
                 String DeadlineTime = ("" + mHour) + ("" + mMinute) ; // HHMM
 
 //                Toast.makeText(getApplicationContext(), DeadlineDate, Toast.LENGTH_SHORT).show();
@@ -145,6 +147,7 @@ public class add_new_todo extends AppCompatActivity {
                         date_time = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                         TextInputLayout deadlineDate=(TextInputLayout) findViewById(R.id.deadlineDate);
                         Objects.requireNonNull(deadlineDate.getEditText()).setText(date_time);
+                        DeadlineDate= ("" + dayOfMonth) + ("" + (monthOfYear+1)) + ("" + year); // DDMMYYYY
                         //*************Call Time Picker Here ********************
                     }
                 }, mYear, mMonth, mDay);
