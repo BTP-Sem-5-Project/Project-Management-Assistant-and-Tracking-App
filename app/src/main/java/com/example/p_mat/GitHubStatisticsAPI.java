@@ -35,7 +35,7 @@ public class GitHubStatisticsAPI extends AppCompatActivity {
     String owner="nalin-programmer";
     String repository="Loco-Cart-Frontend";
     String urlForBarchart="https://api.github.com/repos/"+owner+"/"+repository+"/stats/commit_activity";
-    String urlForPiechart="https://api.github.com/repos/"+owner+"/"+repository+"/commits";
+    String urlForPiechart="https://api.github.com/repos/"+owner+"/"+repository+"/commits?per_page=100";
     HashMap<String,Integer>map=new HashMap<>();
     HashMap<Integer,Integer>hmap=new HashMap<>();
 
@@ -43,10 +43,8 @@ public class GitHubStatisticsAPI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_github_statistics_chart);
-
         MakeVolleyConnectionPieChart();
         MakeVolleyConnectionBarChart();
-
 
     }
     public void setPieChart(){
