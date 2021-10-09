@@ -76,7 +76,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:text="Raj"
-
+                    android:id="@+id/name"
                     android:textColor="@color/white"
                     android:textSize="25dp"
                     android:textStyle="bold">
@@ -89,6 +89,7 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="5dp"
                     android:alpha=".75"
+                    android:id="@+id/organization"
                     android:text="AI Department"
                     android:textColor="@color/white"
                     android:textSize="15dp"
@@ -114,6 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="4dp"
                         android:text="30 Year"
+                        android:id="@+id/exprience"
                         android:textColor="@color/white"
                         android:textSize="15dp"
                         android:textStyle="bold">
@@ -149,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="4dp"
                         android:text="B.Tech"
+                        android:id="@+id/qualification"
                         android:textColor="@color/white"
                         android:textSize="15dp"
                         android:textStyle="bold">
@@ -209,6 +212,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/github"
                         android:text="tony_stark">
 
                     </TextView>
@@ -231,6 +235,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/linkedin"
                         android:text="jarvis">
                     </TextView>
                 </LinearLayout>
@@ -300,6 +305,7 @@
                                     android:textSize="15dp"
                                     android:layout_margin="5dp"
                                     android:textColor="@color/black"
+                                    android:id="@+id/email"
                                     android:text="tonystark@gmial.com">
 
                                 </TextView>
@@ -358,6 +364,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_margin="5dp"
                                     android:text="0150150150"
+                                    android:id="@+id/mobile"
                                     android:textColor="@color/black"
                                     android:textSize="15dp"
                                     android:textStyle="bold">
@@ -421,6 +428,7 @@
                                     android:textSize="15dp"
                                     android:layout_margin="5dp"
                                     android:textColor="@color/black"
+                                    android:id="@+id/skills"
                                     android:text="AI Enthusiast,Tech Expert">
                                 </TextView>
                             </LinearLayout>

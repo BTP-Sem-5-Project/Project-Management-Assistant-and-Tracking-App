@@ -35,7 +35,7 @@ public class GitHubStatisticsAPI extends AppCompatActivity {
     String owner="nalin-programmer";
     String repository="Loco-Cart-Frontend";
     String urlForBarchart="https://api.github.com/repos/"+owner+"/"+repository+"/stats/commit_activity";
-    String urlForPiechart="https://api.github.com/repos/"+owner+"/"+repository+"/commits";
+    String urlForPiechart="https://api.github.com/repos/"+owner+"/"+repository+"/commits?per_page=100";
     HashMap<String,Integer>map=new HashMap<>();
     HashMap<Integer,Integer>hmap=new HashMap<>();
 
@@ -43,10 +43,8 @@ public class GitHubStatisticsAPI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_github_statistics_chart);
-
         MakeVolleyConnectionPieChart();
         MakeVolleyConnectionBarChart();
-
 
     }
     public void setPieChart(){
@@ -57,7 +55,9 @@ public class GitHubStatisticsAPI extends AppCompatActivity {
         for (String name: map.keySet()) {
             String key = name.toString();
             int value = map.get(name);
+            if(!key.equals("web-flow")){
            dataEntries.add(new ValueDataEntry(key,value));
+            }
         }
         pie.data(dataEntries);
         pie.legend().itemsLayout(LegendLayout.VERTICAL);
@@ -127,12 +127,14 @@ public class GitHubStatisticsAPI extends AppCompatActivity {
                         JSONObject committer=obj.getJSONObject("committer");
                         String committerName=committer.getString("login");
 
-                        if (map.containsKey(committerName)) {
-                            map.put(committerName, map.get(committerName) + 1);
+                            if (map.containsKey(committerName)) {
+                                map.put(committerName, map.get(committerName) + 1);
+                            }
+                            else {
+                                map.put(committerName, 1);
+
                         }
-                        else {
-                            map.put(committerName, 1);
-                        }
+
                     }
                     setPieChart();
 
