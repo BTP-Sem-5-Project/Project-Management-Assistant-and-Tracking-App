@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -30,10 +31,8 @@ public class GitHubCommitAPI extends AppCompatActivity {
     //Githun APi url Info
     String owner="nalin-programmer";
     String repository="Loco-Cart-Frontend";
-    String url="https://api.github.com/repos/"+owner+"/"+repository+"/commits";
+
     //https://api.github.com/repos/nalin-programmer/Loco-Cart-Frontend/commits
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,50 +44,51 @@ public class GitHubCommitAPI extends AppCompatActivity {
         rvCommits=findViewById(R.id.rvCommits);
         rvCommits.setLayoutManager(new LinearLayoutManager(this));
         AppCompatButton appCompatButton;
-        MakeVolleyConnection(url);
-
-
-
+        MakeVolleyConnection();
     }
-    public void MakeVolleyConnection(String url){
 
+    public void MakeVolleyConnection(){
         ArrayList<Commit>commitsArrayList=new ArrayList<Commit>();
         //Requesting Data from GITHUB api
         RequestQueue requestQueue= Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    for(int i=0;i<response.length();i++){
-                        JSONObject obj=response.getJSONObject(i);
-                        JSONObject committer=obj.getJSONObject("committer");
-                        JSONObject commit = obj.getJSONObject("commit");
-                        JSONObject author = commit.getJSONObject("author");
-                        String commiterName=author.getString("name");
-                        String commitDate=author.getString("date");
-                        String commitMsg =commit.getString("message");
-                        commitsArrayList.add(new Commit(commiterName,commitDate,commitMsg));
-                    }
-
-                    CommitsAdapter adapter= new CommitsAdapter(commitsArrayList);
-                    rvCommits.setAdapter(adapter);
-                    findViewById(R.id.buttonBarChart).setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(getApplicationContext(), GitHubStatisticsAPI.class);
-                            startActivity(intent);
+        for(int j=0;j<15;j++) {
+            String url="https://api.github.com/repos/"+owner+"/"+repository+"/commits?page="+j+"&per_page=100";
+            JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray response) {
+                    try {
+                        for (int i = 0; i < response.length(); i++) {
+                            if(response.length()==0) return;
+                            JSONObject obj = response.getJSONObject(i);
+                            JSONObject committer = obj.getJSONObject("committer");
+                            JSONObject commit = obj.getJSONObject("commit");
+                            JSONObject author = commit.getJSONObject("author");
+                            String commiterName = author.getString("name");
+                            String commitDate = author.getString("date");
+                            String commitMsg = commit.getString("message");
+                            commitsArrayList.add(new Commit(commiterName, commitDate, commitMsg));
                         }
-                    });
+                        CommitsAdapter adapter = new CommitsAdapter(commitsArrayList);
+                        rvCommits.setAdapter(adapter);
+                        findViewById(R.id.buttonBarChart).setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getApplicationContext(), GitHubStatisticsAPI.class);
+                                startActivity(intent);
+                            }
+                        });
 
-                }catch (JSONException | ParseException e) {
-                    e.printStackTrace();
+                    } catch (JSONException | ParseException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        });
-        requestQueue.add(jsonArrayRequest);
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                }
+            });
+
+            requestQueue.add(jsonArrayRequest);
+        }
     }
 }
