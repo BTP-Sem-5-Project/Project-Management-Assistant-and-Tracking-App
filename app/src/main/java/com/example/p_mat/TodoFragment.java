@@ -98,14 +98,26 @@ public class TodoFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot allorg : snapshot.getChildren()){
-                    System.out.println("------------------------------------------------------------------");
                     System.out.println(allorg.getKey());
                     if(allorg.getKey().equals(myproject)){
-                        System.out.println("---------------");
-                        List<String> group = (List<String>) allorg.child("members").getValue();
-                        for(int i = 0; i < group.size(); i ++){
-                            MEMBERS.add(group.get(i));
-                        }
+                        ValueEventListener eventListener10 = new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                for(DataSnapshot all : snapshot.getChildren()){
+                                        if(all.getKey().equals("members")) {
+                                            List<String> group = (List<String>) allorg.child("members").getValue();
+                                            for (int i = 0; i < group.size(); i++) {
+                                                MEMBERS.add(group.get(i));
+                                            }
+                                        }
+                                    }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        };
+                        reference.child(myproject).addValueEventListener(eventListener10);
                     }
                 }
 
