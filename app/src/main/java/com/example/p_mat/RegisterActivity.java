@@ -25,6 +25,7 @@ import java.util.List;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
+
 public class RegisterActivity extends AppCompatActivity {
     private DatabaseReference myDatabase;
     private EditText Name,Phone,OTP,Exp,Github,Skills,Qualification,LinkedIn,Password;
