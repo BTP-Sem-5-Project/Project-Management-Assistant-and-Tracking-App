@@ -100,23 +100,38 @@
                     android:text="Select Developers"
                     android:layout_marginTop="20dp"
                     ></TextView>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Select Developer manually"
-                    android:layout_marginTop="20px"
-                    >
-
-                    <AutoCompleteTextView
-                        android:id="@+id/autoCompleteNoticeItem"
-                        android:layout_width="match_parent"
+                    android:orientation="horizontal">
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:enabled="false"
-                        android:inputType="none"/>
+                        android:hint="Select Developer manually"
+                        android:layout_marginTop="20px"
+                        >
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <AutoCompleteTextView
+                            android:id="@+id/autoCompleteSelectDev"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:inputType="none"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <Button
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="55dp"
+                        android:layout_height="60dp"
+                        android:textSize="30dp"
+                        android:textColor="@color/white"
+                        android:text="+">
+
+                    </Button>
+                </LinearLayout>
+
                 <Button
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
