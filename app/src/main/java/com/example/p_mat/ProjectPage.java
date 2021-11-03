@@ -34,6 +34,13 @@ public class ProjectPage extends AppCompatActivity {
                 onClickPeopleButton(ProjectName);
             }
         });
+        findViewById(R.id.toProjectInfo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),GitHubCommitAPI.class);
+                startActivity(intent);
+            }
+        });
 
     }
     public void onClickPeopleButton(String ProjectName){

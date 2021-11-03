@@ -41,16 +41,15 @@
                     android:gravity="center">
 
                     <Button
-                        android:id="@+id/containedButton"
+                        android:id="@+id/accept"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="ACCEPT"
                         android:layout_marginRight="10dp"
                         android:backgroundTint="#0000ff"
-                        android:minHeight="0dp"
                         />
                     <Button
-                        android:id="@+id/containedButton"
+                        android:id="@+id/reject"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="DECLINE"
