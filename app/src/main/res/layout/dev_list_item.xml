@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/dev_item_layout">
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="20dp"
+        android:layout_margin="10dp"
+        app:cardElevation="4dp"
+        android:backgroundTint="@color/teal_700"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/ll_dev"
+                >
+                <TextView
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dev_name"
+                    android:textSize="18sp"
+                    android:padding="8dp"
+                    android:layout_margin="10dp"
+                    android:textColor="@color/white"
+                    >
+                </TextView>
+                <CheckBox
+                    android:id="@+id/include_dev"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="5dp"
+                    android:scaleX="2.00"
+                    android:scaleY="2.00"
+                    android:buttonTint="@color/white"
+                    android:textColor="@color/teal_700"
+                    ></CheckBox>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="8dp"
+                android:textColor="@color/white"
+                android:id="@+id/dev_similarity">
+
+            </TextView>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

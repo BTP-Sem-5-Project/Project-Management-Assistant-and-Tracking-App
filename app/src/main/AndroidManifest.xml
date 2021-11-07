@@ -19,6 +19,7 @@
 
         <activity android:name=".ProjectPage"></activity>
         <activity android:name=".CreateOrganization">
+
         </activity>
         <activity
             android:name=".InvitationBox"
@@ -34,25 +35,23 @@
         <activity android:name=".add_new_notice" />
         <activity android:name=".PeopleActivity" />
         <activity android:name=".GitHubStatisticsAPI"></activity>
+        <activity android:name=".AddProject"></activity>
         <activity
             android:name=".Dashboard"
             android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 5201451f1c014e638f4208879cd8491630cd23b9
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".SignInActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" >
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
         </activity>
 

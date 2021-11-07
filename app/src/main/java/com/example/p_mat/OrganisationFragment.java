@@ -37,6 +37,7 @@ import java.util.concurrent.CompletableFuture;
  */
 public class OrganisationFragment extends Fragment {
 
+    public Button AddProjectButton;
 
     // Organization: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -83,8 +84,6 @@ public class OrganisationFragment extends Fragment {
 
 
 
-
-
     }
 
 
@@ -107,6 +106,7 @@ public class OrganisationFragment extends Fragment {
 
         Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
         Button inviteButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.invitebutton);
+
         Button addNoticeButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.addnoticebuttonorganisation);
         Button createOrganizationButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.createorganization);
         addNoticeButton.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +128,16 @@ public class OrganisationFragment extends Fragment {
 
 
 
+
+
+        AddProjectButton = ORGANIZATIONACTIVITY.findViewById(R.id.addProjectButton);
+
+        AddProjectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(OrganisationFragment.this.getActivity(),AddProject.class));
+            }
+        });
         inviteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(OrganisationFragment.this.getActivity(),InviteNewMember.class);
