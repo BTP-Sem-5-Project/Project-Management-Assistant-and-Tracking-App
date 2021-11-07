@@ -49,7 +49,6 @@ public class InvitationBox extends AppCompatActivity {
                         ArrayList<String> temp = new ArrayList<>();
                         temp.add(inviteHelper.getTitle());
                         StoreTodo.add(temp);
-//                        System.out.println("OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
                     }
                 }
                 int N = StoreTodo.size();
