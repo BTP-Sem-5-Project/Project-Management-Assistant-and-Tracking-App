@@ -2,6 +2,7 @@ package com.example.p_mat;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.view.View;
@@ -34,7 +35,8 @@ public class InviteNewMember extends AppCompatActivity {
                 else{
                     FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
                     DatabaseReference reference = rootNode.getReference("invitation");
-                    InvitationHelper invitationHelper = new InvitationHelper("Nutanix",mail);
+                    SharedPreferences sharedPreferences = getSharedPreferences("FIXED", MODE_PRIVATE);
+                    InvitationHelper invitationHelper = new InvitationHelper(sharedPreferences.getString("ORG", "DEFAULT"),mail);
                     String id = reference.push().getKey();
                     reference.child(id).setValue(invitationHelper);
                     Toast.makeText(getApplicationContext(), "SUCCESS", Toast.LENGTH_SHORT).show();
