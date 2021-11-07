@@ -31,14 +31,27 @@
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/drawable/ic_equalizer_black_24dp.xml" value="0.19583333333333333" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_add_new_notice.xml" value="0.13958333333333334" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_add_new_todo.xml" value="0.1796875" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_create_organization.xml" value="0.1796875" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_dashboard.xml" value="0.1796875" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_git_bar_chart.xml" value="0.14666666666666667" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_git_hub_commit.xml" value="0.22" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_github_statistics_chart.xml" value="0.159375" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_invitation_box.xml" value="0.10277777777777777" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_invite_new_member.xml" value="0.1" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_main.xml" value="0.1796875" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_people.xml" value="0.1796875" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_project_page.xml" value="0.1640625" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_regester.xml" value="0.1796875" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/activity_register.xml" value="0.159375" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/commit.xml" value="0.1578125" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/fragment_assitant.xml" value="0.1578125" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/fragment_notice.xml" value="0.1796875" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/fragment_organisation.xml" value="0.1796875" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/fragment_todo.xml" value="0.14583333333333334" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/invitation_card.xml" value="0.1796875" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/layout_dialog.xml" value="0.1796875" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/notice_card.xml" value="0.1796875" />
+        <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/organization_member_card.xml" value="0.1796875" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/organization_project_card.xml" value="0.1640625" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/project_page.xml" value="0.1796875" />
         <entry key="..\:/SEM-5 BTP/Project-Management-Assistant-and-Tracking-App/app/src/main/res/layout/todo_card.xml" value="0.1796875" />
