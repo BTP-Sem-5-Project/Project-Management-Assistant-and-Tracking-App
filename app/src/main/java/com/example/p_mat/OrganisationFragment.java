@@ -70,15 +70,23 @@ public class OrganisationFragment extends Fragment {
 
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
 
+
+
+
+
     }
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -94,8 +102,32 @@ public class OrganisationFragment extends Fragment {
             }
         });
 
+
+
+
         Button peopleButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.peoplebutton);
         Button inviteButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.invitebutton);
+        Button addNoticeButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.addnoticebuttonorganisation);
+        Button createOrganizationButton = (Button) ORGANIZATIONACTIVITY.findViewById(R.id.createorganization);
+        addNoticeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrganisationFragment.this.getActivity(),add_new_notice.class);
+                startActivity(intent);
+
+            }
+        });
+
+        createOrganizationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(OrganisationFragment.this.getActivity(),CreateOrganization.class);
+                startActivity(intent);
+            }
+        });
+
+
+
         inviteButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(OrganisationFragment.this.getActivity(),InviteNewMember.class);
@@ -110,6 +142,7 @@ public class OrganisationFragment extends Fragment {
                 onClickPeopleButton();
             }
         });
+
         FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
         ArrayList<ArrayList<String>> StoreProject = new ArrayList<ArrayList<String>>();
         DatabaseReference reference = rootNode.getReference("projects");
@@ -132,6 +165,8 @@ public class OrganisationFragment extends Fragment {
                 System.out.println("Length of n: "+ N);
                 String[] dataName = new String[N];
                 String[] dataDescription = new String[N];
+
+
 
                 for(int i = 0; i < N; i ++){
                     dataName[i] = StoreProject.get(i).get(0);
@@ -168,6 +203,8 @@ public class OrganisationFragment extends Fragment {
             System.out.println("2==================================================================================");
         });
 
+
+
         return ORGANIZATIONACTIVITY;
     }
     public void onClickPeopleButton(){
@@ -175,4 +212,5 @@ public class OrganisationFragment extends Fragment {
         intent.putExtra("content", "organization");
         startActivity(intent);
     }
+
 }
