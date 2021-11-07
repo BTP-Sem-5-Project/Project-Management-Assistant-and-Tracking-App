@@ -38,6 +38,10 @@
             android:name=".Dashboard"
             android:exported="true" >
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5201451f1c014e638f4208879cd8491630cd23b9
 
         </activity>
         <activity android:name=".SignInActivity" />
