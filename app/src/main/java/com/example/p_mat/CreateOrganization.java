@@ -61,11 +61,27 @@ public class CreateOrganization extends AppCompatActivity {
                             if(!snapshot.exists()){
                                 block = true;
                                 List<CEO> ceo = new ArrayList<CEO>();;
-                                CEO newCeo = new CEO(ceoName,userId);
+                                CEO newCeo = new CEO(ceoName,userId,email);
                                 ceo.add(newCeo);
                                 List<HR> hr = new ArrayList<HR>();
+                                HR newHr = new HR("","","");
+                                hr.add(newHr);
                                 List<ProjectManager> projectManagers = new ArrayList<ProjectManager>();
+                                ProjectManager pm = new ProjectManager("Nalin Agrawal","-MgaYcSwDdHV4AbpnzY2","nalinagrawal333@gmail.com");
+                                projectManagers.add(pm);
+                                pm = new ProjectManager("Vijay Joshi","-MhA7NGsfCzWTbiVXd6R","developer.vijayjoshi@gmail.com");
+                                projectManagers.add(pm);
+                                pm = new ProjectManager("Prerit","-MkRUn5p2QS11NmWx_Ev","preritkrjha@gmail.com");
+                                projectManagers.add(pm);
                                 List<Developer> developers = new ArrayList<Developer>();
+                                Developer newDev = new Developer("Nalin Agrawal","-MgaYcSwDdHV4AbpnzY2","nalinagrawal333@gmail.com");
+                                developers.add(newDev);
+                                newDev = new Developer("Vijay Joshi","-MhA7NGsfCzWTbiVXd6R","developer.vijayjoshi@gmail.com");
+                                developers.add(newDev);
+                                newDev = new Developer("Anonymous","-Mh-Ep1NfX-GEzX1MuUx","joshivijay324@gmail.com");
+                                developers.add(newDev);
+                                newDev = new Developer("Prerit","-MkRUn5p2QS11NmWx_Ev","preritkrjha@gmail.com");
+                                developers.add(newDev);
                                 List<Project> projects = new ArrayList<Project>();
                                 List<PublicNotice> publicNotices = new ArrayList<PublicNotice>();
                                 String id = myDatabase.push().getKey();
