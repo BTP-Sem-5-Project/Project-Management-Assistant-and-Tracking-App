@@ -76,7 +76,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Enter Required Skills(comma separated)"
+                    android:text="Enter Required Skills(space separated)"
                     android:layout_marginTop="20dp"
                     ></TextView>
 
@@ -89,7 +89,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="top"
-                        android:id="@+id/addSkills"
+                        android:id="@+id/desiredSkills"
                         >
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -97,42 +97,23 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Select Developers"
+                    android:text="Select Project Managers"
                     android:layout_marginTop="20dp"
                     ></TextView>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <com.google.android.material.textfield.TextInputLayout
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:hint="Select Developer manually"
-                        android:layout_marginTop="20px"
-                        >
+                    <Spinner
+                        android:id="@+id/pm_spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
 
-                        <AutoCompleteTextView
-                            android:id="@+id/autoCompleteSelectDev"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:inputType="none"/>
 
-                    </com.google.android.material.textfield.TextInputLayout>
-                    <Button
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_width="55dp"
-                        android:layout_height="60dp"
-                        android:textSize="30dp"
-                        android:textColor="@color/white"
-                        android:text="+">
-
-                    </Button>
                 </LinearLayout>
 
                 <Button
+                    android:id="@+id/get_devs"
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
@@ -140,6 +121,11 @@
                     android:text="USE ML RECOMMENDER TO SELECT dEVELOPER">
 
                 </Button>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/dev_ranks"
+                    ></androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
 
 
