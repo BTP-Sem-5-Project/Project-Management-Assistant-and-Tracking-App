@@ -67,7 +67,11 @@ public class CreateOrganization extends AppCompatActivity {
                                 HR newHr = new HR("","","");
                                 hr.add(newHr);
                                 List<ProjectManager> projectManagers = new ArrayList<ProjectManager>();
-                                ProjectManager pm = new ProjectManager("","","");
+                                ProjectManager pm = new ProjectManager("Nalin Agrawal","-MgaYcSwDdHV4AbpnzY2","nalinagrawal333@gmail.com");
+                                projectManagers.add(pm);
+                                pm = new ProjectManager("Vijay Joshi","-MhA7NGsfCzWTbiVXd6R","developer.vijayjoshi@gmail.com");
+                                projectManagers.add(pm);
+                                pm = new ProjectManager("Prerit","-MkRUn5p2QS11NmWx_Ev","preritkrjha@gmail.com");
                                 projectManagers.add(pm);
                                 List<Developer> developers = new ArrayList<Developer>();
                                 Developer newDev = new Developer("Nalin Agrawal","-MgaYcSwDdHV4AbpnzY2","nalinagrawal333@gmail.com");
