@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
         <androidx.cardview.widget.CardView
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
@@ -50,7 +51,7 @@
             >
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp">
                 <TextView
@@ -70,6 +71,27 @@
                         android:layout_height="match_parent"
                         android:gravity="top"
                         android:id="@+id/addProjectName"
+                        >
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="GitHub Link"
+                    android:layout_marginTop="20dp"
+                    >
+
+                </TextView>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="top"
+                        android:id="@+id/addGitHubLink"
                         >
                     </com.google.android.material.textfield.TextInputEditText>
                 </com.google.android.material.textfield.TextInputLayout>
@@ -107,7 +129,8 @@
                     <Spinner
                         android:id="@+id/pm_spinner"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        />
 
 
                 </LinearLayout>
@@ -121,9 +144,18 @@
                     android:text="USE ML RECOMMENDER TO SELECT dEVELOPER">
 
                 </Button>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/list_title">
+
+                </TextView>
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:id="@+id/dev_ranks"
                     ></androidx.recyclerview.widget.RecyclerView>
             </LinearLayout>
