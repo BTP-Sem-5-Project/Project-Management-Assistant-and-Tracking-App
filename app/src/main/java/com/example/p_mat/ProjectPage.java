@@ -41,6 +41,14 @@ public class ProjectPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        findViewById(R.id.addnoticebuttonorganisation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),add_new_notice.class);
+                startActivity(intent);
+            }
+        });
+
 
     }
     public void onClickPeopleButton(String ProjectName){
