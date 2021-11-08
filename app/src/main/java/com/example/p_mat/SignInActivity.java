@@ -62,6 +62,8 @@ public class SignInActivity extends AppCompatActivity {
                                 if(snapshot.exists()){
                                     for(DataSnapshot child: snapshot.getChildren()){
                                         User user = child.getValue(User.class);
+                                        String hashedPassword = BCrypt.withDefaults().hashToString(12,signInPassword.getText().toString().toCharArray());
+                                        System.out.println(hashedPassword);
                                         BCrypt.Result result = BCrypt.verifyer().verify(signInPassword.getText().toString().toCharArray(),user.getPassword());
 
                                         if(result.verified){
@@ -70,6 +72,8 @@ public class SignInActivity extends AppCompatActivity {
                                             SharedPreferences.Editor editor = sharedpreferences.edit();
                                             editor.putString("EMAIL", signInEmail.getText().toString());
                                             editor.putString("ORG",user.getOrganization());
+                                            editor.putString("USER_ID",user.getId());
+                                            System.out.println(user.getOrganization());
                                             editor.commit();
                                             Toast.makeText(SignInActivity.this,user.getOrganization(),Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(SignInActivity.this,Dashboard.class);
