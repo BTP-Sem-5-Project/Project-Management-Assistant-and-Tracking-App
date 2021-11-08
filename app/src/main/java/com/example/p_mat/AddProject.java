@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,8 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AddProject extends AppCompatActivity implements DeveloperAdapter.ListItemClickListener{
-    public String organiaztionId = "-Mn_q4jynbHJS3npzGBX";
-    public String orgName = "VPN Orignial";
+
     public ArrayList<String> pmIds = new ArrayList<String>();
     public ArrayList<String> pmEmails = new ArrayList<String>();
     public ArrayList<String> pmNames = new ArrayList<String>();
@@ -68,13 +69,14 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
     Boolean found = false;
     public HashSet<String> selectedDevIds = new HashSet<String>();
     public Spinner mySpinner;
+    public String organiaztionId,orgName;
 
 
     private DatabaseReference myDatabase,orgDatabase;
     private AutoCompleteTextView selectDev;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_project);
         myDatabase = FirebaseDatabase.getInstance().getReference("users");
@@ -91,6 +93,10 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
         SubmitProject = findViewById(R.id.addProject);
         mySpinner = findViewById(R.id.pm_spinner);
 
+        SharedPreferences sharedPreferences = this.getSharedPreferences("FIXED", Context.MODE_PRIVATE);
+        organiaztionId = "-Mn_q4jynbHJS3npzGBX";
+        orgName = sharedPreferences.getString("ORG","");
+        System.out.println(organiaztionId+" ASDdas "+sharedPreferences.getString("ORG",""));
 
 //        if(!found){
 //            orgDatabase.addValueEventListener(new ValueEventListener() {
@@ -262,6 +268,7 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
                         public void onErrorResponse(VolleyError error) {
                             VolleyLog.e("Error: ", error.getMessage());
                             Log.e("VOLLEY", error.toString());
+                            System.out.println(error.toString());
                             Toast.makeText(getApplicationContext(), "Failed " + error.toString(), Toast.LENGTH_SHORT).show();
                         }
                 });
@@ -277,6 +284,8 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
                     for(DataSnapshot child:snapshot.getChildren()){
                         organization = child.getValue(Organization.class);
                         found=true;
+                        organiaztionId = child.getKey();
+                        System.out.println("@@@+"+child.getKey());
                         System.out.println(organization.getProjectManager());
                         System.out.println("found");
                         List<ProjectManager> projectManagers = organization.getProjectManager();
