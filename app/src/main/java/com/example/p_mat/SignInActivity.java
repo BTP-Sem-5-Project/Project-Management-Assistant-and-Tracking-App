@@ -75,7 +75,7 @@ public class SignInActivity extends AppCompatActivity {
                                             editor.putString("USER_ID",user.getId());
                                             System.out.println(user.getOrganization());
                                             editor.commit();
-                                            Toast.makeText(SignInActivity.this,user.getOrganization(),Toast.LENGTH_SHORT).show();
+                                         //   Toast.makeText(SignInActivity.this,user.getOrganization(),Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(SignInActivity.this,Dashboard.class);
                                             intent.putExtra("USER_ID",user.getId());
                                             intent.putExtra("USER_EMAIL",user.getEmail());
