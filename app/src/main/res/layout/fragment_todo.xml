@@ -35,7 +35,7 @@
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 android:textSize="30dp"
-                android:text="To-Do"
+                android:text="Tasks"
                 >
 
             </TextView>
