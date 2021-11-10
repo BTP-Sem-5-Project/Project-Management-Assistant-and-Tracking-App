@@ -4,21 +4,23 @@ import java.util.List;
 
 public class Project{
     public String name;
-    public Developer teamLead;
+    public String github;
     public List<Developer> developer;
     public List<Notice> notice;
     public List<Task> task;
+    public ProjectManager projectManager;
 
     public Project(){
 
     }
 
-    public Project(String name, Developer teamLead, List<Developer> developer, List<Notice> notice, List<Task> task) {
+    public Project(String name,String github, List<Developer> developer, List<Notice> notice, List<Task> task, ProjectManager projectManager) {
         this.name = name;
-        this.teamLead = teamLead;
+        this.github = github;
         this.developer = developer;
         this.notice = notice;
         this.task = task;
+        this.projectManager = projectManager;
     }
 
     public String getName() {
@@ -27,14 +29,6 @@ public class Project{
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Developer getTeamLead() {
-        return teamLead;
-    }
-
-    public void setTeamLead(Developer teamLead) {
-        this.teamLead = teamLead;
     }
 
     public List<Developer> getDeveloper() {
@@ -59,5 +53,21 @@ public class Project{
 
     public void setTask(List<Task> task) {
         this.task = task;
+    }
+
+    public ProjectManager getProjectManager() {
+        return projectManager;
+    }
+
+    public void setProjectManager(ProjectManager projectManager) {
+        this.projectManager = projectManager;
+    }
+
+    public String getGithub() {
+        return github;
+    }
+
+    public void setGithub(String github) {
+        this.github = github;
     }
 }

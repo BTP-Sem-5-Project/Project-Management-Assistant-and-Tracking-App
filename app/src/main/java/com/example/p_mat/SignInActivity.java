@@ -54,14 +54,21 @@ public class SignInActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                System.out.println("Clicked");
                 if(!(signInEmail.getText().toString().equals(""))){
                     if(!(signInPassword.getText().toString().equals(""))){
+                        System.out.println("ok");
+                        System.out.println(signInEmail.getText().toString());
                         myDatabase.orderByChild("email").equalTo(signInEmail.getText().toString()).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                System.out.println(snapshot);
                                 if(snapshot.exists()){
                                     for(DataSnapshot child: snapshot.getChildren()){
                                         User user = child.getValue(User.class);
+                                        System.out.println(user);
+                                        String hashedPassword = BCrypt.withDefaults().hashToString(12,signInPassword.getText().toString().toCharArray());
+                                        System.out.println(hashedPassword);
                                         BCrypt.Result result = BCrypt.verifyer().verify(signInPassword.getText().toString().toCharArray(),user.getPassword());
 
                                         if(result.verified){
@@ -70,8 +77,10 @@ public class SignInActivity extends AppCompatActivity {
                                             SharedPreferences.Editor editor = sharedpreferences.edit();
                                             editor.putString("EMAIL", signInEmail.getText().toString());
                                             editor.putString("ORG",user.getOrganization());
+                                            editor.putString("USER_ID",user.getId());
+                                            System.out.println(user.getOrganization());
                                             editor.commit();
-                                            Toast.makeText(SignInActivity.this,user.getOrganization(),Toast.LENGTH_SHORT).show();
+                                         //   Toast.makeText(SignInActivity.this,user.getOrganization(),Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(SignInActivity.this,Dashboard.class);
                                             intent.putExtra("USER_ID",user.getId());
                                             intent.putExtra("USER_EMAIL",user.getEmail());
@@ -87,7 +96,7 @@ public class SignInActivity extends AppCompatActivity {
 
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-
+                                System.out.println(error.toString());
                             }
                         });
                     }else{
