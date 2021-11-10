@@ -101,7 +101,7 @@ public class add_new_todo extends AppCompatActivity {
                 FirebaseDatabase rootNode = FirebaseDatabase.getInstance();
                 DatabaseReference reference = rootNode.getReference("todo");
 
-                Log.d("him","================================================"+DeadlineDate);
+             //   Log.d("him","================================================"+DeadlineDate);
                 //DeadlineDate has correct date use it
                 String DeadlineTime = "";
                 String temp = String.valueOf(mHour);
