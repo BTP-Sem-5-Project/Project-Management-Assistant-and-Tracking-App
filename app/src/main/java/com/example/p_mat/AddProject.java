@@ -31,6 +31,7 @@ import com.example.p_mat.Models.DeveloperModel;
 import com.example.p_mat.Models.Notice;
 import com.example.p_mat.Models.Organization;
 import com.example.p_mat.Models.Project;
+import com.example.p_mat.Models.ProjectHelper;
 import com.example.p_mat.Models.ProjectManager;
 import com.example.p_mat.Models.Task;
 import com.example.p_mat.Models.User;
@@ -72,7 +73,7 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
     public String organiaztionId,orgName;
 
 
-    private DatabaseReference myDatabase,orgDatabase;
+    private DatabaseReference myDatabase,orgDatabase,projectDatabase,orgRef;
     private AutoCompleteTextView selectDev;
 
     @Override
@@ -138,6 +139,7 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
                                             Organization organization = childSnapshot.getValue(Organization.class);
                                             List<Project> projectList = organization.getProject();
                                             System.out.println(projectList);
+
                                             String pmName = mySpinner.getSelectedItem().toString();
                                             ProjectManager projectManager = new ProjectManager();
                                             for(int i=0;i<pmNames.size();i++){
@@ -151,11 +153,23 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
                                             List<Notice> notices = new ArrayList<Notice>();
                                             List<Task> tasks = new ArrayList<Task>();
                                             List<Developer> developers = new ArrayList<Developer>();
+                                            projectDatabase = FirebaseDatabase.getInstance().getReference("projects");
+                                            List<String> projectMembers = new ArrayList<String>();
+                                            projectMembers.add(projectManager.email);
+
                                             for(int i=0;i<devIds.size();i++){
                                                 if(selectedDevIds.contains(devIds.get(i))){
                                                     developers.add(new Developer(devNames.get(i),devIds.get(i),devEmails.get(i)));
+                                                    projectMembers.add(devEmails.get(i));
                                                 }
                                             }
+                                            ProjectHelper projectHelper = new ProjectHelper("This is "+projectName.getText().toString(),projectName.getText().toString(),projectManager.email,projectMembers,orgName);
+                                            String id = projectDatabase.push().getKey();
+                                            projectDatabase.child(id).setValue(projectHelper);
+
+                                            orgRef = FirebaseDatabase.getInstance().getReference("organization");
+
+
                                             System.out.println(developers);
                                             Project newProject = new Project(projectName.getText().toString(),githubLink.getText().toString(),developers,notices,tasks,projectManager);
                                             System.out.println(newProject);
