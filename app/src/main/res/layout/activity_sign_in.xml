@@ -91,7 +91,7 @@
                 android:id="@+id/signInButton"
                 android:layout_width="155dp"
                 android:layout_height="62dp"
-                android:backgroundTint="#7C83FD"
+                android:backgroundTint="@color/PrimaryDark"
                 android:backgroundTintMode="screen"
                 android:text="Sign In"
                 android:layout_gravity="center_horizontal"
