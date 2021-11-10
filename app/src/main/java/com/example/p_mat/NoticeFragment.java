@@ -102,7 +102,7 @@ public class NoticeFragment extends Fragment {
 
         SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("FIXED", Context.MODE_PRIVATE);
         String myproject = sharedPreferences.getString("ORG", "DEFAULT");
-
+        Toast.makeText(this.getActivity(), myproject, Toast.LENGTH_SHORT).show();
         RecyclerView recyclerView = (RecyclerView) NOTICEACTIVIY.findViewById(R.id.noticeitems);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 

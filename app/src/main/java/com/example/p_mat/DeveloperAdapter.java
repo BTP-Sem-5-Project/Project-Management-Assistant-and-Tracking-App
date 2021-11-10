@@ -18,22 +18,33 @@ import java.util.List;
 
 public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.ViewHolder> {
     public ArrayList<DeveloperModel> data = new ArrayList<DeveloperModel>();
+    public ListItemClickListener mOnClickListener;
 
-    DeveloperAdapter(ArrayList<DeveloperModel> d){
+    public DeveloperAdapter(ArrayList<DeveloperModel> d,ListItemClickListener onClickListener){
         data = d;
+        this.mOnClickListener = onClickListener;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView DevName, DevSimilarity;
-        CheckBox IncludeDev;
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        TextView DevName, DevSimilarity,IncludeDev;
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             DevName = itemView.findViewById(R.id.dev_name);
             DevSimilarity = itemView.findViewById(R.id.dev_similarity);
             IncludeDev = itemView.findViewById(R.id.include_dev);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            mOnClickListener.onListItemClick(view,position);
         }
     }
 
+    interface ListItemClickListener{
+        void onListItemClick(View view,int position);
+    }
 
     @NonNull
     @Override
@@ -45,7 +56,7 @@ public class DeveloperAdapter extends RecyclerView.Adapter<DeveloperAdapter.View
     public void onBindViewHolder(@NonNull DeveloperAdapter.ViewHolder holder, int position) {
         holder.DevName.setText(data.get(position).getName());
         holder.DevSimilarity.setText("Similarity = "+String.valueOf(Math.round(data.get(position).getMatch()*100.0)/100.0)+"%");
-        holder.IncludeDev.setChecked(true);
+        holder.IncludeDev.setText("Selected: No");
     }
 
     @Override

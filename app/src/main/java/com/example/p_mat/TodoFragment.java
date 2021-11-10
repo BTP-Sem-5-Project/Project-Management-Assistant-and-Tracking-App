@@ -164,6 +164,8 @@ public class TodoFragment extends Fragment {
                         ArrayList<String> temp = new ArrayList<>();
                         temp.add(todoHelper.getTitle());
                         temp.add(todoHelper.getDescription());
+                        temp.add(todoHelper.getDeadlineDate());
+                        temp.add(todoHelper.getDeadlineTime());
                         StoreTodo.add(temp);
                         System.out.println("EMAIL -> " + todoHelper.getTitle());
                         for(int i = 0; i < temp.size(); i ++){
@@ -176,6 +178,8 @@ public class TodoFragment extends Fragment {
                 int N = StoreTodo.size();
                 String[] dataTitle = new String[N];
                 String[] dataDescription = new String[N];
+                String[] deadlineTime = new String[N];
+                String[] deadlineDate = new String[N];
 
 //                Toast.makeText(getContext(), "HH" + N, Toast.LENGTH_SHORT).show();
 
@@ -185,10 +189,12 @@ public class TodoFragment extends Fragment {
                     if(dataDescription[i].length() >= 150){
                         dataDescription[i] = dataDescription[i].substring(0, 150) + "...";
                     }
+                    deadlineDate[i] = StoreTodo.get(i).get(2);
+                    deadlineTime[i] = StoreTodo.get(i).get(3);
                 }
 
                 // create an adapter
-                recyclerView.setAdapter(new ToDoAdapter(dataTitle, dataDescription));
+                recyclerView.setAdapter(new ToDoAdapter(dataTitle, dataDescription, deadlineDate, deadlineTime));
             }
 
             @Override

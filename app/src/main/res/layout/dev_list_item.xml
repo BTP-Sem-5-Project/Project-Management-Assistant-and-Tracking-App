@@ -10,7 +10,8 @@
         app:cardCornerRadius="20dp"
         android:layout_margin="10dp"
         app:cardElevation="4dp"
-        android:backgroundTint="@color/teal_700"
+        android:outlineSpotShadowColor="@color/black"
+        android:backgroundTint="@color/white"
         >
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,35 +24,44 @@
                 android:id="@+id/ll_dev"
                 >
                 <TextView
-                    android:layout_width="310dp"
+                    android:layout_width="170dp"
                     android:layout_height="wrap_content"
                     android:id="@+id/dev_name"
                     android:textSize="18sp"
                     android:padding="8dp"
                     android:layout_margin="10dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     >
                 </TextView>
-                <CheckBox
-                    android:id="@+id/include_dev"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
-                    android:scaleX="2.00"
-                    android:scaleY="2.00"
-                    android:buttonTint="@color/white"
-                    android:textColor="@color/teal_700"
-                    ></CheckBox>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="8dp"
-                android:textColor="@color/white"
-                android:id="@+id/dev_similarity">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:textAlignment="viewEnd"
+                    android:paddingRight="10dp">
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_margin="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:id="@+id/dev_similarity">
 
-            </TextView>
+                    </TextView>
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:textSize="12sp"
+                        android:textColor="@color/black"
+                        android:id="@+id/include_dev">
+
+                    </TextView>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
