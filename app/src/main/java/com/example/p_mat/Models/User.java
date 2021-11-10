@@ -11,7 +11,7 @@ public class User {
     public User() {
     }
 
-    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, String password, int experience, List<String> skills, Boolean available, String organization) {
+    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, String password, int experience, List<String> skills, Boolean available, String Organization) {
         this.id = id;
         this.name = name;
         this.github = github;
@@ -23,7 +23,7 @@ public class User {
         this.experience = experience;
         this.skills = skills;
         this.available = available;
-        this.organization = organization;
+        this.organization = Organization;
     }
 //    public User(String id, String name, String github, String email, String phone, String qualification, String linkedin, String password, int experience, List<String> skills, Boolean available) {
 //        this.id = id;

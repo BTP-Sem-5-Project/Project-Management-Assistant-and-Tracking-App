@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -24,7 +28,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.p_mat.Models.Developer;
 import com.example.p_mat.Models.DeveloperModel;
+import com.example.p_mat.Models.Notice;
 import com.example.p_mat.Models.Organization;
+import com.example.p_mat.Models.Project;
+import com.example.p_mat.Models.ProjectHelper;
 import com.example.p_mat.Models.ProjectManager;
 import com.example.p_mat.Models.Task;
 import com.example.p_mat.Models.User;
@@ -39,13 +46,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-public class AddProject extends AppCompatActivity {
-    public String organiaztionId = "-Mn_q4jynbHJS3npzGBX";
-    public String orgName = "VPN Orignial";
+public class AddProject extends AppCompatActivity implements DeveloperAdapter.ListItemClickListener{
+
     public ArrayList<String> pmIds = new ArrayList<String>();
     public ArrayList<String> pmEmails = new ArrayList<String>();
     public ArrayList<String> pmNames = new ArrayList<String>();
@@ -54,17 +62,22 @@ public class AddProject extends AppCompatActivity {
     public ArrayList<String> devNames = new ArrayList<String>();
     public ArrayList<List<String>> devSkills = new ArrayList<List<String>>();
     public Organization organization;
-    public Button GetDevs;
-    public EditText DesiredSkills;
+    public Button GetDevs,SubmitProject;
+    public EditText DesiredSkills,projectName,githubLink;
     public RecyclerView mRecyclerView;
+    public TextView recyclerTitle;
     public ArrayList<DeveloperModel> recyclerDevs = new ArrayList<DeveloperModel>();
     Boolean found = false;
+    public HashSet<String> selectedDevIds = new HashSet<String>();
+    public Spinner mySpinner;
+    public String organiaztionId,orgName;
 
-    private DatabaseReference myDatabase,orgDatabase;
+
+    private DatabaseReference myDatabase,orgDatabase,projectDatabase,orgRef;
     private AutoCompleteTextView selectDev;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_project);
         myDatabase = FirebaseDatabase.getInstance().getReference("users");
@@ -75,7 +88,16 @@ public class AddProject extends AppCompatActivity {
         GetDevs = findViewById(R.id.get_devs);
         DesiredSkills = findViewById(R.id.desiredSkills);
         mRecyclerView = findViewById(R.id.dev_ranks);
+        recyclerTitle = findViewById(R.id.list_title);
+        projectName = findViewById(R.id.addProjectName);
+        githubLink = findViewById(R.id.addGitHubLink);
+        SubmitProject = findViewById(R.id.addProject);
+        mySpinner = findViewById(R.id.pm_spinner);
 
+        SharedPreferences sharedPreferences = this.getSharedPreferences("FIXED", Context.MODE_PRIVATE);
+        organiaztionId = "-Mn_q4jynbHJS3npzGBX";
+        orgName = sharedPreferences.getString("ORG","");
+        System.out.println(organiaztionId+" ASDdas "+sharedPreferences.getString("ORG",""));
 
 //        if(!found){
 //            orgDatabase.addValueEventListener(new ValueEventListener() {
@@ -101,6 +123,88 @@ public class AddProject extends AppCompatActivity {
 //            });
 //        }
 
+
+        SubmitProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!projectName.getText().toString().isEmpty()){
+                    if(!githubLink.getText().toString().isEmpty()){
+                        if(!selectedDevIds.isEmpty()){
+                            orgDatabase.orderByChild("name").equalTo(orgName).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    System.out.println(snapshot);
+                                    if(snapshot.exists()){
+                                        for(DataSnapshot childSnapshot:snapshot.getChildren()){
+                                            Organization organization = childSnapshot.getValue(Organization.class);
+                                            List<Project> projectList = organization.getProject();
+                                            System.out.println(projectList);
+
+                                            String pmName = mySpinner.getSelectedItem().toString();
+                                            ProjectManager projectManager = new ProjectManager();
+                                            for(int i=0;i<pmNames.size();i++){
+                                                if(pmNames.get(i).equals(pmName)){
+                                                    String pmId = pmIds.get(i);
+                                                    String pmEmail = pmEmails.get(i);
+                                                    projectManager = new ProjectManager(pmName,pmId,pmEmail);
+                                                    break;
+                                                }
+                                            }
+                                            List<Notice> notices = new ArrayList<Notice>();
+                                            List<Task> tasks = new ArrayList<Task>();
+                                            List<Developer> developers = new ArrayList<Developer>();
+                                            projectDatabase = FirebaseDatabase.getInstance().getReference("projects");
+                                            List<String> projectMembers = new ArrayList<String>();
+                                            projectMembers.add(projectManager.email);
+
+                                            for(int i=0;i<devIds.size();i++){
+                                                if(selectedDevIds.contains(devIds.get(i))){
+                                                    developers.add(new Developer(devNames.get(i),devIds.get(i),devEmails.get(i)));
+                                                    projectMembers.add(devEmails.get(i));
+                                                }
+                                            }
+                                            ProjectHelper projectHelper = new ProjectHelper("This is "+projectName.getText().toString(),projectName.getText().toString(),projectManager.email,projectMembers,orgName);
+                                            String id = projectDatabase.push().getKey();
+                                            projectDatabase.child(id).setValue(projectHelper);
+
+                                            orgRef = FirebaseDatabase.getInstance().getReference("organization");
+
+
+                                            System.out.println(developers);
+                                            Project newProject = new Project(projectName.getText().toString(),githubLink.getText().toString(),developers,notices,tasks,projectManager);
+                                            System.out.println(newProject);
+                                            if(projectList!=null)
+                                            projectList.add(newProject);
+                                            else{
+                                                projectList = new ArrayList<Project>();
+                                                projectList.add(newProject);
+                                            }
+                                            System.out.println(projectList);
+                                            orgDatabase.child(organiaztionId).child("project").setValue(projectList);
+                                            Toast.makeText(getApplicationContext(),"Project Added Successfully",Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(AddProject.this,Dashboard.class));
+                                            finish();
+                                            android.os.Process.killProcess(android.os.Process.myPid());
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }else{
+                            Toast.makeText(getApplicationContext(),"Please select developers",Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+                        Toast.makeText(getApplicationContext(),"Please enter GiHub link",Toast.LENGTH_SHORT).show();
+                    }
+                }else{
+                    Toast.makeText(getApplicationContext(),"Please enter project name",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
         GetDevs.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,9 +268,10 @@ public class AddProject extends AppCompatActivity {
                                         recyclerDevs.add(newDev);
                                     }
                                     System.out.println(recyclerDevs);
-                                    DeveloperAdapter adapter = new DeveloperAdapter(recyclerDevs);
+                                    DeveloperAdapter adapter = new DeveloperAdapter(recyclerDevs,AddProject.this::onListItemClick);
                                     mRecyclerView.setAdapter(adapter);
                                     mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(),RecyclerView.VERTICAL,false));
+                                    recyclerTitle.setText("Here's a list of developers ranked by simialrity with the desired skills using our smart ML assistant. Click on the developers to confirm their inclusion");
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -177,175 +282,13 @@ public class AddProject extends AppCompatActivity {
                         public void onErrorResponse(VolleyError error) {
                             VolleyLog.e("Error: ", error.getMessage());
                             Log.e("VOLLEY", error.toString());
+                            System.out.println(error.toString());
                             Toast.makeText(getApplicationContext(), "Failed " + error.toString(), Toast.LENGTH_SHORT).show();
                         }
                 });
                 requestQueue.add(jsonObjectRequest);
             }
         });
-
-//        API LINKS: https://btp-sem5-ml.herokuapp.com/
-//        health check: https://btp-sem5-ml.herokuapp.com/health_check
-//        rank_devs: https://btp-sem5-ml.herokuapp.com/rank_devs
-//
-//        Sample request i/p:
-//        {
-//            "desired_skills":"react node SQL javascript",
-//                "candidates":[
-//            {
-//                "id":"123",
-//                    "name":"abc",
-//                    "skills":[
-//                "c",
-//                        "c++",
-//                        "React",
-//                        "nODE",
-//                        "c#"
-//            ]
-//            },
-//            {
-//                "id":"456",
-//                    "name":"def",
-//                    "skills":[
-//                "sql",
-//                        "JavaScript",
-//                        "React",
-//                        "nODE",
-//                        "c#"
-//            ]
-//            },
-//            {
-//                "id":"789",
-//                    "name":"ghi",
-//                    "skills":[
-//                "c",
-//                        "c++",
-//                        "golang",
-//                        "nODE",
-//                        "c#"
-//            ]
-//            },
-//            {
-//                "id":"101",
-//                    "name":"jkl",
-//                    "skills":[
-//                "sql",
-//                        "c++",
-//                        "React",
-//                        "nODE",
-//                        "c#"
-//            ]
-//            },
-//            {
-//                "id":"131",
-//                    "name":"lmn",
-//                    "skills":[
-//                "java",
-//                        "c++",
-//                        "angular",
-//                        "django",
-//                        "c#"
-//            ]
-//            }
-//    ]
-//        }
-//
-//
-//        Sample response:
-//        {
-//            "ranklist": [
-//            {
-//                "id": "456",
-//                    "mat": [
-//                1,
-//                        1,
-//                        1,
-//                        1
-//            ],
-//                "name": "def",
-//                    "similarity": 1,
-//                    "skills": [
-//                "sql",
-//                        "javascript",
-//                        "react",
-//                        "node",
-//                        "c#"
-//            ]
-//            },
-//            {
-//                "id": "101",
-//                    "mat": [
-//                1,
-//                        1,
-//                        1,
-//                        0
-//            ],
-//                "name": "jkl",
-//                    "similarity": 0.8660254037844387,
-//                    "skills": [
-//                "sql",
-//                        "c++",
-//                        "react",
-//                        "node",
-//                        "c#"
-//            ]
-//            },
-//            {
-//                "id": "123",
-//                    "mat": [
-//                1,
-//                        1,
-//                        0,
-//                        0
-//            ],
-//                "name": "abc",
-//                    "similarity": 0.7071067811865475,
-//                    "skills": [
-//                "c",
-//                        "c++",
-//                        "react",
-//                        "node",
-//                        "c#"
-//            ]
-//            },
-//            {
-//                "id": "789",
-//                    "mat": [
-//                0,
-//                        1,
-//                        0,
-//                        0
-//            ],
-//                "name": "ghi",
-//                    "similarity": 0.5,
-//                    "skills": [
-//                "c",
-//                        "c++",
-//                        "golang",
-//                        "node",
-//                        "c#"
-//            ]
-//            },
-//            {
-//                "id": "131",
-//                    "mat": [
-//                0,
-//                        0,
-//                        0,
-//                        0
-//            ],
-//                "name": "lmn",
-//                    "similarity": 0,
-//                    "skills": [
-//                "java",
-//                        "c++",
-//                        "angular",
-//                        "django",
-//                        "c#"
-//            ]
-//            }
-//    ]
-//        }
 
         orgDatabase.orderByChild("name").equalTo(orgName).addValueEventListener(new ValueEventListener() {
             @Override
@@ -355,6 +298,8 @@ public class AddProject extends AppCompatActivity {
                     for(DataSnapshot child:snapshot.getChildren()){
                         organization = child.getValue(Organization.class);
                         found=true;
+                        organiaztionId = child.getKey();
+                        System.out.println("@@@+"+child.getKey());
                         System.out.println(organization.getProjectManager());
                         System.out.println("found");
                         List<ProjectManager> projectManagers = organization.getProjectManager();
@@ -435,5 +380,20 @@ public class AddProject extends AppCompatActivity {
 
         }
 
+    }
+
+    @Override
+    public void onListItemClick(View itemView,int position) {
+        TextView IncludeDev = itemView.findViewById(R.id.include_dev);
+        if(IncludeDev.getText().toString().equalsIgnoreCase("Selected: No")){
+            Toast.makeText(this,"Selected "+recyclerDevs.get(position).getName(),Toast.LENGTH_SHORT).show();
+            selectedDevIds.add(recyclerDevs.get(position).getId());
+            IncludeDev.setText("Selected: Yes");
+        }else{
+            Toast.makeText(this,"Unselected "+recyclerDevs.get(position).getName(),Toast.LENGTH_SHORT).show();
+            selectedDevIds.remove(recyclerDevs.get(position).getId());
+            IncludeDev.setText("Selected: No");
+        }
+        System.out.println(selectedDevIds);
     }
 }

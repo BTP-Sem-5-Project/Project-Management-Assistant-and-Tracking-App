@@ -12,11 +12,14 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
 
     private String[] dataTitle;
     private String[] dataDescription;
+    private String[] deadlineTime;
+    private String[] deadllineDate;
 
-
-    public ToDoAdapter(String[] dataTitle, String[] dataDescription){
+    public ToDoAdapter(String[] dataTitle, String[] dataDescription,String[] deadlineDate,String[] deadlineTime){
         this.dataTitle = dataTitle;
         this.dataDescription = dataDescription;
+        this.deadlineTime = deadlineTime;
+        this.deadllineDate = deadlineDate;
     }
 
     @Override
@@ -32,6 +35,16 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ToDoViewHolder
         holder.title.setText(title);
         String description = dataDescription[position];
         holder.description.setText(description);
+        String hour = deadlineTime[position].substring(0,2);
+        String Min = deadlineTime[position].substring(2);
+        String Year = deadllineDate[position].substring(4);
+        String Month = deadllineDate[position].substring(2,4);
+        String Day = deadllineDate[position].substring(0,2);
+        holder.date.setText(Day);
+        holder.month.setText(Month);
+        holder.year.setText(Year);
+        holder.time.setText(hour+""+Min+"");
+
     }
 
     @Override
