@@ -1,15 +1,16 @@
 package com.example.p_mat.Models;
 
 public class HR {
-    public String name, id;
+    public String name, id, email;
 
     public HR(){
 
     }
 
-    public HR(String name, String id) {
+    public HR(String name, String id, String email) {
         this.name = name;
         this.id = id;
+        this.email = email;
     }
 
     public String getName() {
@@ -26,5 +27,13 @@ public class HR {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
