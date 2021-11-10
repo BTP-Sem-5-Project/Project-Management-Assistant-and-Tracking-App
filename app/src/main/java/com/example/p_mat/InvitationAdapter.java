@@ -196,8 +196,8 @@ public class InvitationAdapter extends RecyclerView.Adapter<InvitationAdapter.In
         public InvitationViewHolder(@NonNull View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.title);
-            accept = (Button) itemView.findViewById(R.id.accept);
-            reject = (Button) itemView.findViewById(R.id.reject);
+            accept = (Button) itemView.findViewById(R.id.acceptButton);
+            reject = (Button) itemView.findViewById(R.id.declineButton);
         }
     }
 }
