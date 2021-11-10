@@ -43,7 +43,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="30dp"
-                    android:text="Assign To-Do">
+                    android:text="Assign Tasks">
                 </TextView>
             </androidx.cardview.widget.CardView>
 

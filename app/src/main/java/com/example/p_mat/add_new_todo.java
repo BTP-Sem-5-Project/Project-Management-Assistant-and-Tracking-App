@@ -51,7 +51,7 @@ public class add_new_todo extends AppCompatActivity {
     int mHour;
     int mMinute;
     String AEmail = "";
-    String DeadlineDate;
+    String DeadlineDate = "";
 
 
     //EditText et_show_date_time = (EditText) findViewById(R.id.et_show_date_time);
@@ -103,14 +103,22 @@ public class add_new_todo extends AppCompatActivity {
 
                 Log.d("him","================================================"+DeadlineDate);
                 //DeadlineDate has correct date use it
-                String DeadlineTime = ("" + mHour) + ("" + mMinute) ; // HHMM
+                String DeadlineTime = "";
+                String temp = String.valueOf(mHour);
+                if(temp.length() == 1){
+                    temp = "0" + temp + "";
+                }
+                DeadlineTime += temp;
+                DeadlineTime += ("" + mMinute);
+
+
 
 //                Toast.makeText(getApplicationContext(), DeadlineDate, Toast.LENGTH_SHORT).show();
                 String Title = todoAddTitle.getText().toString(); // Not more than 25 characters
                 String Description = todoAddDescription.getText().toString(); // Not more than 60 characters
                 Boolean Completed = false; // true or false
                 String AssignedEmail = AEmail;
-                    if(!Description.equals("") && !Description.equals("") && !DeadlineDate.equals("") && !DeadlineTime.equals("") && !AssignedEmail.equals("")){
+                    if(!Description.equals("") && !DeadlineDate.equals("") && !DeadlineTime.equals("") && !AssignedEmail.equals("")){
                         TodoHelper todoHelper = new TodoHelper(DeadlineDate, DeadlineTime, Title, Description, Completed, AssignedEmail);
                         String id = reference.push().getKey();
                         reference.child(id).setValue(todoHelper);
@@ -147,7 +155,20 @@ public class add_new_todo extends AppCompatActivity {
                         date_time = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
                         TextInputLayout deadlineDate=(TextInputLayout) findViewById(R.id.deadlineDate);
                         Objects.requireNonNull(deadlineDate.getEditText()).setText(date_time);
-                        DeadlineDate= ("" + dayOfMonth) + ("" + (monthOfYear+1)) + ("" + year); // DDMMYYYY
+
+                        DeadlineDate= ""; // DDMMYYYY
+//                        ("" + dayOfMonth) + ("" + (monthOfYear+1)) + ("" + year);
+                        String temp = String.valueOf(dayOfMonth);
+                        if(temp.length() == 1){
+                            temp = "0" + temp;
+                        }
+                        DeadlineDate += temp;
+                        temp = String.valueOf(monthOfYear+1);
+                        if(temp.length() == 1){
+                            temp = "0" + temp;
+                        }
+                        DeadlineDate += temp;
+                        DeadlineDate += ("" + year);
                         //*************Call Time Picker Here ********************
                     }
                 }, mYear, mMonth, mDay);
