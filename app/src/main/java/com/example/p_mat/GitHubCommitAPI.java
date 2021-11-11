@@ -27,19 +27,28 @@ import java.util.Map;
 
 public class GitHubCommitAPI extends AppCompatActivity {
     RecyclerView rvCommits;
+    public String owner,repository;
 
-    //Githun APi url Info
-    String owner="nalin-programmer";
-    String repository="Loco-Cart-Frontend";
-
-    //https://api.github.com/repos/nalin-programmer/Loco-Cart-Frontend/commits
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_git_hub_commit);
+
+
+        //Githun APi url Info
+        String link = getIntent().getStringExtra("projectLink");
+        String sublink = link.substring(19);
+        System.out.println(link);
+        System.out.println(sublink);
+        System.out.println(sublink.indexOf('/'));
+        owner=sublink.substring(0,sublink.indexOf('/'));
+        repository=sublink.substring(sublink.indexOf('/')+1);
+
+
         TextView textView=findViewById(R.id.repoName);
         textView.setText(repository);
+        //https://api.github.com/repos/nalin-programmer/Loco-Cart-Frontend/commits
 
         rvCommits=findViewById(R.id.rvCommits);
         rvCommits.setLayoutManager(new LinearLayoutManager(this));
@@ -74,6 +83,8 @@ public class GitHubCommitAPI extends AppCompatActivity {
                             @Override
                             public void onClick(View v) {
                                 Intent intent = new Intent(getApplicationContext(), GitHubStatisticsAPI.class);
+                                intent.putExtra("owner",owner);
+                                intent.putExtra("repository",repository);
                                 startActivity(intent);
                             }
                         });

@@ -28,6 +28,8 @@ public class ProjectPage extends AppCompatActivity {
         TextView projectDescription = findViewById(R.id.projectdescription);
         projectDescription.setText(ProjectDescription);
 
+        String projectLink = getIntent().getStringExtra("projectLink");
+
         Button peopleButton = (Button) findViewById(R.id.peoplebutton);
         peopleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -38,6 +40,7 @@ public class ProjectPage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(),GitHubCommitAPI.class);
+                intent.putExtra("projectLink",projectLink);
                 startActivity(intent);
             }
         });
