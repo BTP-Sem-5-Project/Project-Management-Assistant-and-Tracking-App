@@ -163,9 +163,9 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
                                                     projectMembers.add(devEmails.get(i));
                                                 }
                                             }
-                                            ProjectHelper projectHelper = new ProjectHelper("This is "+projectName.getText().toString(),projectName.getText().toString(),projectManager.email,projectMembers,orgName);
+                                            ProjectHelper projectHelper = new ProjectHelper("This is "+projectName.getText().toString(),projectName.getText().toString(),projectManager.email,projectMembers,orgName,githubLink.getText().toString());
                                             String id = projectDatabase.push().getKey();
-                                            projectDatabase.child(id).setValue(projectHelper);
+
 
                                             orgRef = FirebaseDatabase.getInstance().getReference("organization");
 
@@ -180,7 +180,9 @@ public class AddProject extends AppCompatActivity implements DeveloperAdapter.Li
                                                 projectList.add(newProject);
                                             }
                                             System.out.println(projectList);
+                                            projectDatabase.child(id).setValue(projectHelper);
                                             orgDatabase.child(organiaztionId).child("project").setValue(projectList);
+
                                             Toast.makeText(getApplicationContext(),"Project Added Successfully",Toast.LENGTH_SHORT).show();
                                             startActivity(new Intent(AddProject.this,Dashboard.class));
                                             finish();
