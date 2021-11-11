@@ -32,10 +32,10 @@ import java.util.HashMap;
 
 public class GitHubStatisticsAPI extends AppCompatActivity {
     //Githun APi url Info
-    String owner="nalin-programmer";
-    String repository="Loco-Cart-Frontend";
-    String urlForBarchart="https://api.github.com/repos/"+owner+"/"+repository+"/stats/commit_activity";
-    String urlForPiechart="https://api.github.com/repos/"+owner+"/"+repository+"/commits?per_page=100";
+    String owner;
+    String repository;
+    String urlForBarchart;
+    String urlForPiechart;
     HashMap<String,Integer>map=new HashMap<>();
     HashMap<Integer,Integer>hmap=new HashMap<>();
 
@@ -43,6 +43,12 @@ public class GitHubStatisticsAPI extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_github_statistics_chart);
+        owner = getIntent().getStringExtra("owner");
+        repository = getIntent().getStringExtra("repository");
+        System.out.println(owner);
+        System.out.println(repository);
+        urlForBarchart="https://api.github.com/repos/"+owner+"/"+repository+"/stats/commit_activity";
+        urlForPiechart="https://api.github.com/repos/"+owner+"/"+repository+"/commits?per_page=100";
         MakeVolleyConnectionPieChart();
         MakeVolleyConnectionBarChart();
 

@@ -8,16 +8,18 @@ public class ProjectHelper {
     String projectManager;
     List<String> members;
     String Organization;
+    String GitHub;
 
     public ProjectHelper() {
     }
 
-    public ProjectHelper(String description, String name, String projectManager, List<String> members, String Organization) {
+    public ProjectHelper(String description, String name, String projectManager, List<String> members, String Organization,String GitHub) {
         Description = description;
         Name = name;
         this.projectManager = projectManager;
         this.members = members;
         this.Organization = Organization;
+        this.GitHub = GitHub;
     }
 
     public String getDescription() {
@@ -58,5 +60,13 @@ public class ProjectHelper {
 
     public void setOrganization(String organization) {
         Organization = organization;
+    }
+
+    public String getGitHub() {
+        return GitHub;
+    }
+
+    public void setGitHub(String gitHub) {
+        GitHub = gitHub;
     }
 }

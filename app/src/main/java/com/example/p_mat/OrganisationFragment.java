@@ -168,6 +168,7 @@ public class OrganisationFragment extends Fragment {
                         ArrayList<String> temp = new ArrayList<>();
                         temp.add(projectHelper.getName());
                         temp.add(projectHelper.getDescription());
+                        temp.add(projectHelper.getGitHub());
                         StoreProject.add(temp);
                     }
                 }
@@ -175,7 +176,7 @@ public class OrganisationFragment extends Fragment {
                 System.out.println("Length of n: "+ N);
                 String[] dataName = new String[N];
                 String[] dataDescription = new String[N];
-
+                String[] dataLink = new String[N];
 
 
                 for(int i = 0; i < N; i ++){
@@ -184,6 +185,7 @@ public class OrganisationFragment extends Fragment {
                     if(dataDescription[i].length() >= 150){
                         dataDescription[i] = dataDescription[i].substring(0, 150) + "...";
                     }
+                    dataLink[i] = StoreProject.get(i).get(2);
                 }
                 // create an adapter
                 OrganizationAdapter.RecycleViewClickListener listener;
@@ -193,6 +195,7 @@ public class OrganisationFragment extends Fragment {
                         Intent intent = new Intent(OrganisationFragment.this.getActivity(),ProjectPage.class);
                         intent.putExtra("projectName",dataName[positionId]);
                         intent.putExtra("projectDescription", dataDescription[positionId]);
+                        intent.putExtra("projectLink",dataLink[positionId]);
                         startActivity(intent);
                     }
                 };
